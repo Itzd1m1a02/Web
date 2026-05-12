@@ -75,14 +75,6 @@ def verificar_token(credentials: HTTPAuthorizationCredentials = Depends(security
         raise HTTPException(status_code=401, detail="Token inválido")
 
 # =========================
-# AUTENTICAÇÃO JWT
-# =========================
-
-@app.get("/")
-def redirecionar_docs():
-    return RedirectResponse(url="/docs")
-
-# =========================
 # ENDPOINT LOGIN
 # =========================
 
@@ -114,13 +106,13 @@ def listar_disciplinas():
     return disciplinas
 
 
-@app.post("/disciplinas", response_model=Disciplina)
-def criar_disciplina(
-    disciplina: Disciplina,
-    usuario=Depends(verificar_token)
-):
-    disciplinas.append(disciplina.dict())
-    return disciplina
+#@app.post("/disciplinas", response_model=Disciplina)
+#def criar_disciplina(
+#    disciplina: Disciplina,
+#    usuario=Depends(verificar_token)
+#):
+#    disciplinas.append(disciplina.dict())
+#    return disciplina
 
 
 # =========================

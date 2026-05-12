@@ -62,7 +62,6 @@ http://127.0.0.1:8000/docs
 | ------ | ------------ | ----------------- | -------- |
 | POST   | /login       | Gera token JWT    | Público  |
 | GET    | /disciplinas | Lista disciplinas | Público  |
-| POST   | /disciplinas | Cria disciplina   | JWT      |
 | GET    | /alunos      | Lista alunos      | Público  |
 | POST   | /alunos      | Cria aluno        | JWT      |
 
@@ -133,7 +132,6 @@ Os dados são armazenados em listas Python no arquivo `database.py`.
 | login()              | Gera token JWT    |
 | verificar_token()    | Valida token      |
 | listar_disciplinas() | Lista disciplinas |
-| criar_disciplina()   | Cria disciplina   |
 | listar_alunos()      | Lista alunos      |
 | criar_aluno()        | Cria aluno        |
 
