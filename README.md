@@ -142,6 +142,12 @@ npm run dev
 ```
 A aplicação rodará em `http://localhost:5173`
 
+### Inicalizador
+```powershell
+cd Server
+iniciar.bat
+```
+A aplicação rodará os dois comandos acima e instalará bibliotecas importantes para o uso da aplicação
 ---
 
 ## 📁 Estrutura de Diretórios
@@ -198,20 +204,17 @@ Biscoito/
 ---
 
 ## 📋 Próximos Passos Prioritários
-
-1. **Segurança (CRÍTICO)**
-   - Validar isolamento de dados por usuário em todas as rotas
-   
-2. **Calendário (ALTA PRIORIDADE)**
+  
+1. **Calendário (ALTA PRIORIDADE)**
    - Implementar visualização de tarefas em calendário
    
-3. **IA Gemini (MÉDIA PRIORIDADE)**
+2. **IA Gemini (MÉDIA PRIORIDADE)**
    - Completar integração para geração de rotinas
    
-4. **Gráficos (MÉDIA PRIORIDADE)**
+3. **Gráficos (MÉDIA PRIORIDADE)**
    - Adicionar biblioteca de gráficos (Chart.js ou similar)
    
-5. **Padrão de Código (CONTÍNUO)**
+4. **Padrão de Código (CONTÍNUO)**
    - Refatorar durante o desenvolvimento das outras features
 
 ---
