@@ -1,0 +1,136 @@
+/* ========================================== */
+/* CONFIGURAÇÕES GERAIS E FONTES              */
+/* ========================================== */
+
+/* O asterisco (*) aplica essa regra para TODOS os elementos da página de uma vez */
+* {
+    /* Garante que o padding e a borda não aumentem o tamanho total das caixas */
+    box-sizing: border-box;
+    
+    /* Define a fonte do site. Tenta a 'Segoe UI' primeiro, e vai descendo a lista se não achar */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ========================================== */
+/* ESTILO DO FUNDO DA PÁGINA (BODY)           */
+/* ========================================== */
+body {
+    /* Cria aquele degradê maravilhoso do azul para o roxo em um ângulo de 135 graus */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    
+    /* O Flexbox aqui é usado para centralizar tudo perfeitamente na tela */
+    display: flex;
+    justify-content: center; /* Centraliza na horizontal (eixo X) */
+    align-items: center; /* Centraliza na vertical (eixo Y) */
+    
+    /* A altura ocupa 100% da altura da janela visível do navegador (Viewport Height) */
+    height: 100vh;
+    margin: 0; /* Tira as margens brancas chatas que o navegador coloca sozinho */
+}
+
+/* ========================================== */
+/* CAIXA PRINCIPAL DE LOGIN                   */
+/* ========================================== */
+.login-container {
+    background-color: white; /* Fundo branco para destacar do fundo colorido */
+    padding: 2.5rem; /* Espaço interno para o conteúdo não grudar na borda */
+    border-radius: 10px; /* Deixa as quinas redondinhas e modernas */
+    
+    /* Sombra: 0 (X), 10px (Y, para baixo), 25px (espalhamento), cor preta com 20% de opacidade */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    
+    /* Garante que a caixa se adapte ao celular (100%), mas não passe de 400px no computador */
+    width: 100%;
+    max-width: 400px;
+
+    /* Para centralizar a caixa na tela, usamos posicionamento absoluto e transformações */
+    position: absolute; /* Posicionamento absoluto para centralizar com top e left */
+    top: 50%; /* Move a caixa para baixo 50% da altura da tela */
+    left: 50%; /* Move a caixa para a direita 50% da largura da tela */
+    transform: translate(-50%, -50%); /* Ajusta a posição para centralizar */
+}
+
+/* Estilo do título "Bem-vindo" */
+h2 {
+    text-align: center; /* Centraliza o texto */
+    color: #333; /* Cinza escuro para facilitar a leitura */
+    margin-bottom: 1.5rem; /* Empurra os campos de texto para baixo */
+    font-size: 2.75rem; /* Tamanho da letra um pouco maior que o normal */
+}
+
+/* ========================================== */
+/* ESTILOS DOS CAMPOS DE TEXTO (INPUTS)       */
+/* ========================================== */
+.input-group {
+    margin-bottom: 1rem; /* Dá espaço entre o campo de E-mail e o de Senha */
+}
+
+/* O texto que diz "E-mail" e "Senha" */
+.input-group label {
+    display: block; /* Faz o texto ocupar a linha toda, jogando o input para baixo */
+    margin-bottom: 0.3rem; /* Descola um pouquinho da caixinha de digitar */
+    color: #666; /* Cinza médio */  
+    font-size: 1.75ex; /* Tamanho da letra um pouco maior para facilitar a leitura */
+    text-align: left; /* Alinha o texto à esquerda, para ficar mais organizado */
+}
+
+/* A caixinha onde o usuário digita de fato */
+.input-group input {
+    width: 100%; /* Ocupa toda a largura disponível na caixa principal */
+    padding: 0.75rem; /* Espaço interno confortável */
+    border: 1px solid #ddd; /* Bordinha cinza clara bem sutil */
+    border-radius: 5px; /* Quinas um pouco redondinhas */
+    outline: none; /* Tira o contorno azul fortão padrão do navegador ao clicar */
+    
+    /* Prepara a caixinha para mudar a cor da borda de forma suave (em 0.3 segundos) */
+    transition: border-color 0.3s;
+}
+
+/* Efeito de FOCO: Quando o usuário clica dentro da caixinha para digitar */
+.input-group input:focus {
+    border-color: #764ba2; /* A borda fica roxa para mostrar claramente onde ele está digitando */
+}
+
+/* ========================================== */
+/* ESTILOS DO BOTÃO "ENTRAR"                  */
+/* ========================================== */
+button {
+    width: 100%; /* Botão grandão, da largura inteira da caixa */
+    padding: 0.75rem; /* Altura do botão */
+    border: none; /* Tira a borda 3D esquisita que vem por padrão no HTML */
+    border-radius: 5px;
+    background-color: #1db100; /* Fundo verde da sua paleta */
+    color: white; /* Letra branca */
+    font-size: 1rem;
+    font-weight: bold; /* Letra mais gordinha/negrito */
+    cursor: pointer; /* Muda o ícone do mouse para uma "mãozinha" de clique */
+    
+    /* Prepara o botão para mudar de cor suavemente ao passar o mouse */
+    transition: background 0.3s;
+}
+
+/* Efeito de HOVER: Quando o usuário passa o mouse por cima do botão */
+button:hover {
+    background-color: #2ecc71; /* O roxo fica um pouco mais escuro, dando ideia de que é clicável */
+}
+
+/* ========================================== */
+/* ESTILOS DOS LINKS ABAIXO DO BOTÃO          */
+/* ========================================== */
+.options {
+    display: flex; /* Transforma a área num flexbox para organizar os links lado a lado */
+    justify-content: space-between; /* Joga um link pra cada lado (Esqueceu a senha na esquerda, Criar conta na direita) */
+    margin-top: 1rem; /* Descola do botão de cima */
+    font-size: 0.85rem; /* Letra um pouquinho menor que o normal */
+}
+
+/* Estilo dos links (<a>) */
+.options a {
+    color: #764ba2; /* Links na cor roxa */
+    text-decoration: none; /* Tira aquele sublinhado feio padrão de links da internet */
+}
+
+/* Quando passa o mouse no link */
+.options a:hover {
+    text-decoration: underline; /* Devolve o sublinhado SÓ quando o mouse está em cima, para dar interatividade */
+}

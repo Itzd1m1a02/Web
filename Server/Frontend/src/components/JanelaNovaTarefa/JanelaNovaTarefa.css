@@ -1,0 +1,136 @@
+/* ==========================================================================
+   FUNDO DO MODAL (A película escura que cobre a Home)
+   ========================================================================== */
+.modal-overlay {
+  position: fixed; /* Trava na tela inteira */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* Fundo preto transparente */
+  backdrop-filter: blur(4px); /* Desfoque moderno do que está atrás */
+  display: flex;
+  justify-content: center; /* Centraliza a janela na horizontal */
+  align-items: center; /* Centraliza a janela na vertical */
+  z-index: 9999; /* Garante que o modal fique por cima da Navbar e de tudo */
+}
+
+/* ==========================================================================
+   CARTÃO DO MODAL (A janela branca principal)
+   ========================================================================== */
+.modal-content {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 24px;
+  width: 90%;
+  max-width: 450px; /* Tamanho máximo para não ficar gigante no PC */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  
+  /* Chama a animação de entrada que criamos lá embaixo */
+  animation: aparecer 0.3s cubic-bezier(0.16, 1, 0.3, 1); 
+}
+
+.modal-content h2 {
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+/* ==========================================================================
+   INPUTS (Campos de formulário)
+   ========================================================================== */
+.input-group {
+  margin-bottom: 1.2rem;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid #eee;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box; 
+  background-color: #fafafa;
+}
+
+/* Quando clica no campo para digitar, a borda fica roxa */
+.modal-input:focus {
+  border-color: #5755FE;
+  background-color: #ffffff;
+}
+
+/* Deixa o campo textarea (observações) com um visual consistente */
+textarea.modal-input {
+  resize: vertical; /* Permite que o usuário aumente a altura, mas não a largura */
+  min-height: 80px;
+}
+
+/* ==========================================================================
+   BOTÕES DE AÇÃO (Cancelar e Salvar)
+   ========================================================================== */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end; /* Joga os botões para a direita */
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn-cancelar, .btn-salvar {
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+/* Estilo do botão Cancelar */
+.btn-cancelar {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.btn-cancelar:hover {
+  background: #e5e7eb;
+  transform: translateY(-2px);
+}
+
+/* Estilo do botão Salvar */
+.btn-salvar {
+  background: #5755FE;
+  color: white;
+}
+
+.btn-salvar:hover {
+  background: #4644e2;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(87, 85, 254, 0.35);
+}
+
+/* ==========================================================================
+   ANIMAÇÃO DE ENTRADA (O pulinho na tela)
+   ========================================================================== */
+@keyframes aparecer {
+  0% { 
+    opacity: 0; 
+    transform: scale(0.9) translateY(20px); /* Começa menor, transparente e um pouco mais para baixo */
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1) translateY(0); /* Termina no tamanho normal e no lugar certo */
+  }
+}

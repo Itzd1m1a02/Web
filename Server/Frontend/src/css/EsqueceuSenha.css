@@ -1,0 +1,110 @@
+/* ========================================== */
+/* CONFIGURAÇÕES GERAIS                       */
+/* ========================================== */
+* { 
+    box-sizing: border-box; 
+    font-family: 'Segoe UI', sans-serif; 
+}
+
+/* ========================================== */
+/* ESTILO DO FUNDO DA PÁGINA (BODY)           */
+/* ========================================== */
+body {
+    /* Olhe o seu truque de design aqui: O degradê está invertido! 
+       Começa no roxo (#764ba2) e vai para o azul (#667eea) */
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    
+    /* Centralização perfeita com Flexbox */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* min-height garante que a tela ocupe pelo menos 100% da altura do navegador */
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px; /* Evita que a caixa encoste nas bordas em telas de celular muito pequenas */
+}
+
+/* ========================================== */
+/* CAIXA BRANCA CENTRAL                       */
+/* ========================================== */
+.signup-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 450px; /* Essa caixa é um pouquinho mais larga (450px) que a do Login (400px) */
+}
+
+/* Título */
+h2 { 
+    text-align: center; 
+    color: #333; 
+    margin-bottom: 1.5rem; 
+}
+
+/* ========================================== */
+/* CAMPOS DE TEXTO (INPUTS)                   */
+/* ========================================== */
+.input-group { 
+    margin-bottom: 1rem; 
+}
+
+/* Texto acima da caixinha (Label) */
+label { 
+    display: block; 
+    margin-bottom: 0.2rem; 
+    color: #555; 
+    /* DICA DO PROFESSOR: 0.5rem equivale a 8px, que é bem pequenininho. 
+       Se achar que ficou difícil de ler, você pode mudar para 0.85rem depois! */
+    font-size: 0.5rem; 
+}
+
+/* Caixinha de digitação */
+input {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none; /* Tira o contorno padrão do navegador */
+}
+
+/* Quando o usuário clica dentro para digitar */
+input:focus { 
+    border-color: #764ba2; /* Borda fica roxa */
+}
+
+/* ========================================== */
+/* BOTÃO E LINK DE VOLTAR                     */
+/* ========================================== */
+.btn-register {
+    width: 100%;
+    padding: 0.8rem;
+    
+    /* Esse é o verde (#2ecc71) que passa a sensação de "recuperação/sucesso" */
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer; /* Mãozinha de clique */
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+/* Quando passa o mouse no botão verde */
+.btn-register:hover { 
+    /* Muda para um verde um pouco mais escuro para dar sensação de interação */
+    background-color: #27ae60; 
+}
+
+/* O link "Lembrou sua senha? Faça login" */
+.back-link {
+    display: block; /* Faz o link pular de linha e ficar isolado embaixo do botão */
+    text-align: center;
+    margin-top: 1rem;
+    color: #764ba2; /* Texto roxo */
+    text-decoration: none; /* Sem sublinhado */
+    font-size: 0.85rem;
+}

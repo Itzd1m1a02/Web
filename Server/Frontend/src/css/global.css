@@ -1,0 +1,15 @@
+/* ========================================== */
+/* CONFIGURAÇÕES GERAIS E FONTES              */
+/* ========================================== */
+/* 1. Importa a fonte direto do servidor do Google */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* 2. O asterisco (*) seleciona TODOS os elementos da tela */
+* {
+    font-family: 'Quicksand', sans-serif;
+}
+
+/* 3. Garante que os botões e inputs também herdem a fonte (por padrão, navegadores às vezes bloqueiam a herança neles) */
+input, button, textarea, select {
+    font-family: inherit;
+}
