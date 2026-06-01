@@ -32,7 +32,6 @@ A aplicação permite que usuários criem, organizem e gerenciem suas rotinas di
 - ✅ **Autenticação e Autorização**
   - Sistema de registro (cadastro) de usuários
   - Login com geração de tokens JWT
-  - Recuperação de senha
   
 - ✅ **Gerenciamento de Tarefas**
   - Criação de novas tarefas
@@ -69,7 +68,7 @@ A aplicação permite que usuários criem, organizem e gerenciem suas rotinas di
 ## 🚧 Funcionalidades a Implementar
 
 ### 🔒 Segurança e Dados
-- [ ] **Isolamento de Dados por Usuário**
+- [x] **Isolamento de Dados por Usuário**
   - Garantir que dados de rotinas sejam salvos apenas para o usuário autenticado
   - Validação de propriedade em todas as operações de leitura/escrita
   - Implementar soft delete para auditoria
@@ -99,8 +98,7 @@ A aplicação permite que usuários criem, organizem e gerenciem suas rotinas di
   - Notificações de prazos próximos
   
 ### 🎨 Padrão e Qualidade de Código
-- [ ] **Adição de id de Usuario para salvas tarefas referentes a ele**
-  - exemplo
+- [x] **Adição de id de Usuario para salvas tarefas referentes a ele**
    
 - [ ] **Padronização de Funções**
   - Refatorar rotas para padrão consistente
