@@ -1,8 +1,8 @@
-# 📚 Biscoito - Gerenciador de Rotinas e Prazos
+# 📚 Projeto WEB - Gerenciador de Rotinas e Prazos
 
 ## 🎯 Propósito do Projeto
 
-O **Biscoito** é uma aplicação web desenvolvida para auxiliar na **gestão de tempo e organização de prazos** de estudos e atividades. Atualmente, é focado em estudantes, mas foi arquitetado para escalar e atender qualquer tipo de usuário em contextos pessoais e profissionais.
+O **Projeto WEB** é uma aplicação web desenvolvida para auxiliar na **gestão de tempo e organização de prazos** de estudos e atividades. Atualmente, é focado em estudantes, mas foi arquitetado para escalar e atender qualquer tipo de usuário em contextos pessoais e profissionais.
 
 A aplicação permite que usuários criem, organizem e gerenciem suas rotinas diárias, evitando perda de dados e garantindo uma experiência personalizada e segura.
 
@@ -154,7 +154,7 @@ A aplicação rodará os dois comandos acima e instalará bibliotecas importante
 ## 📁 Estrutura de Diretórios
 
 ```
-Biscoito/
+Projeto WEB/
 ├── Server/
 │   ├── Backend/
 │   │   ├── app/
