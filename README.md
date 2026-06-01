@@ -148,6 +148,7 @@ cd Server
 iniciar.bat
 ```
 A aplicação rodará os dois comandos acima e instalará bibliotecas importantes para o uso da aplicação
+###
 ---
 
 ## 📁 Estrutura de Diretórios
