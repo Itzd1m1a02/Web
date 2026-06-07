@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import '../css/Login.css'; // Importando o seu estilo
-import { saveAuthData } from '../utils/auth';
+import { saveAuthData, hashPassword } from '../utils/auth';
 
 // Molde de dados do TypeScript para o envio
 interface LoginDados {
@@ -22,7 +22,8 @@ export function Login() {
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
 
-        const loginUsuario: LoginDados = { usuario, email, senha };
+        const senhaHash = await hashPassword(senha);
+        const loginUsuario: LoginDados = { usuario, email, senha: senhaHash };
         
         // tentativa de verificacao 
         try {

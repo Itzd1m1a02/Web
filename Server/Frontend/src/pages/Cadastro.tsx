@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import '../css/Cadastro.css';
+import { hashPassword } from '../utils/auth';
 
 // Molde de dados do TypeScript para o envio
 interface CadastroDados {
@@ -28,10 +29,11 @@ export function Cadastro() {
             return;
         }
 
+        const senhaHash = await hashPassword(senha);
         const dadosCadastro: CadastroDados = {
             usuario: usuario,
             email: email,
-            senha: senha,
+            senha: senhaHash,
             nascimento: nascimento
         };
 
