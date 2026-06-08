@@ -1,0 +1,213 @@
+/* ========== CONTAINER PRINCIPAL ========== */
+.gerenciador-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ========== O CARTÃO BRANCO DO TOPO ========== */
+.gerenciador-header {
+  background: #ffffff; /* O fundo branco sólido que você pediu */
+  padding: 2rem 2.5rem; /* Espaço interno para o cartão ficar "gordinho" */
+  border-radius: 24px; /* Bordas bem redondas igual o da Home */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem; /* Empurra os filtros e as tarefas para baixo */
+}
+
+/* Como o fundo agora é branco, o texto fica escuro */
+.gerenciador-header h2 {
+  font-size: 2rem;
+  color: #1a1a1a; 
+  font-weight: 700;
+  margin: 0;
+}
+
+/* O botão volta a ser roxo para dar contraste com o cartão branco */
+.btn-criar-tarefa {
+  padding: 0.8rem 2rem;
+  background: #5755FE;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-criar-tarefa:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(87, 85, 254, 0.35);
+}
+
+/* ========== FILTROS (Hoje, Esta Semana, Este Mês) ========== */
+.filtros {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  justify-content: center; /* Centraliza igual ao seu esboço */
+}
+
+/* Os filtros ficam idênticos ao botão secundário da Home */
+.filtro-btn {
+  padding: 0.8rem 2rem;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1; /* Faz eles esticarem igual no seu desenho */
+  min-width: 150px;
+  text-align: center;
+}
+
+.filtro-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.filtro-btn.active {
+  background: white;
+  color: #5755FE;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* ========== LISTA DE TAREFAS ========== */
+.tarefas-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* O bloco de "Nenhuma tarefa", visual idêntico ao cartão da Home */
+.tarefas-vazio {
+  text-align: center;
+  padding: 5rem 2rem;
+  background: #ffffff;
+  border-radius: 24px;
+  color: #9CA3AF;
+  font-size: 1.1rem;
+  font-weight: 500;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* ========== TAREFA CARD ========== */
+.tarefa-card {
+  background: white;
+  padding: 1.8rem;
+  border-radius: 20px;
+  border-left: 6px solid #5755FE; /* Mantive a barra lateral, mas mais gordinha */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.tarefa-card:hover {
+  box-shadow: 0 15px 35px rgba(87, 85, 254, 0.15);
+  transform: translateY(-3px);
+}
+
+.tarefa-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.tarefa-titulo {
+  font-size: 1.2rem;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+}
+
+.tarefa-descricao {
+  color: #666;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ========== BADGES E ETIQUETAS ========== */
+.tarefa-badges {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge.status { background-color: #e0e7ff; color: #ffffff; }
+.badge.prioridade { background-color: #fef3c7; color: #ffffff; }
+
+/* ========== FOOTER DA TAREFA ========== */
+.tarefa-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+  border-top: 2px solid #f9fafb;
+}
+
+.data-vencimento {
+  color: #9CA3AF;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ========== BOTÕES DE AÇÃO DOS CARDS ========== */
+.acoes { display: flex; gap: 0.8rem; }
+
+.btn-acao {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-editar { background: #f3f4f6; color: #4b5563; }
+.btn-editar:hover { background: #e5e7eb; transform: translateY(-2px); }
+
+.btn-completar { background: #10B981; color: white; }
+.btn-completar:hover { background: #059669; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3); }
+
+.btn-deletar { background: #fee2e2; color: #EF4444; }
+.btn-deletar:hover { background: #fecaca; transform: translateY(-2px); }
+
+/* (O restante do seu código para o Modal de Edição pode ser substituído por importar aquele ModalNovaTarefa.css que já fizemos!) */
+
+/* ========== RESPONSIVO ========== */
+@media (max-width: 768px) {
+  .filtros { flex-direction: column; }
+  .filtro-btn { width: 100%; }
+  .tarefa-header { flex-direction: column; }
+  .tarefa-footer { flex-direction: column; align-items: stretch; }
+  .btn-acao { flex: 1; text-align: center; }
+}

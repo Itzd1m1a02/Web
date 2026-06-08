@@ -1,163 +1,83 @@
-/* ==========================================================================
-   CONTAINER PRINCIPAL (O fundo da tela)
-   ========================================================================== */
-.home-wrapper {
-  /* Garante que o fundo ocupe no mínimo 100% da altura da tela visível (Viewport Height) */
-  min-height: 100vh; 
-  
-  
-  /* Ativa o Flexbox. É o motor de alinhamento mais poderoso do CSS moderno. */
-  display: flex; 
-  
-  /* Diz para o Flexbox empilhar os elementos de cima para baixo (em coluna), em vez de lado a lado. */
-  flex-direction: column; 
-  
-  /* Centraliza todos os elementos filhos (a navbar e o cartão) horizontalmente no meio da tela. */
-  align-items: center; 
-  
-  /* Define a família de fontes. Tenta usar 'Inter' primeiro. Se o PC não tiver, usa a fonte padrão do sistema. */
-  font-family: 'Inter', system-ui, -apple-system, sans-serif; 
-  
-  /* Dá um "respiro" nas bordas da tela para os elementos não colarem nas beiradas em monitores pequenos. */
-  padding: 2rem; 
-  
-  /* Garante que o padding não aumente o tamanho total da tela, evitando barras de rolagem indesejadas. */
-  box-sizing: border-box; 
+/* =========================================================
+   SISTEMA DE ROLAGEM (SCROLL SNAPPING)
+   ========================================================= */
+.scroll-container {
+  height: 100vh;
+  width: 100vw; 
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: 'Inter', sans-serif;
+  color: #333;
 }
 
-/* ==========================================================================
-   BARRA DE NAVEGAÇÃO (Efeito Vidro / Glassmorphism)
-   ========================================================================== */
-.modern-navbar {
-  /* Ocupa a largura toda disponível, mas trava no máximo em 700px para não ficar esticada em monitores Ultrawide. */
-  width: 150%;
-  max-width: 1200px; 
-  
-  /* Cor de fundo branca com apenas 15% de opacidade (transparente). */
-  background: rgba(255, 255, 255, 0.15); 
-  
-  /* A MÁGICA DO VIDRO: Aplica um desfoque (blur) de 12px apenas no que estiver "atrás" da navbar. */
-  backdrop-filter: blur(12px); 
-  -webkit-backdrop-filter: blur(12px); /* Suporte para navegadores baseados no Safari/Apple. */
-  
-  /* Uma bordinha branca super fina e transparente para simular o reflexo da borda de um vidro. */
-  border: 1px solid rgba(255, 255, 255, 0.2); 
-  
-  /* Arredonda as pontas para formar uma "pílula". */
-  border-radius: 50px; 
-  
-  /* Usa Flexbox para colocar os links lado a lado. */
-  display: flex; 
-  
-  /* Distribui o espaço vazio igualmente ao redor dos links. */
-  justify-content: space-around; 
-  
-  /* Espaçamento interno: 1rem em cima/baixo e 2rem nas laterais. */
-  padding: 1rem 2rem; 
-  
-  /* Uma sombra suave e difusa embaixo da barra para ela "flutuar" sobre o fundo. */
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+/* Oculta a barra de rolagem feia do Windows/Chrome */
+.scroll-container::-webkit-scrollbar {
+  display: none;
 }
 
-/* O "a" seleciona os links dentro da navbar */
-.modern-navbar a {
-  color: white; 
-  text-decoration: none; /* Tira aquele sublinhado feio padrão de links de internet. */
-  font-weight: 500; /* Deixa a fonte com peso médio (nem fina, nem negrito forte). */
-  font-size: 0.95rem; 
-  
-  /* Prepara a animação: qualquer mudança de opacidade ou posição vai durar 0.2 segundos e será suave (ease). */
-  transition: opacity 0.2s ease, transform 0.2s ease; 
+.scroll-section {
+  height: 100vh;
+  width: 100%;
+  scroll-snap-align: start; /* Onde a tela deve "travar" */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding-right: 80px; /* Espaço para a barra lateral */
+  box-sizing: border-box;
 }
 
-/* O ":hover" é ativado quando o mouse passa por cima do link */
-.modern-navbar a:hover {
-  opacity: 0.8; /* Fica um pouquinho transparente. */
-  transform: translateY(-2px); /* Move o link 2 pixels para CIMA no eixo Y. */
+/* =========================================================
+   SEÇÃO 1: DASHBOARD
+   ========================================================= */
+.dashboard-content {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
 }
 
-/* ==========================================================================
-   CARTÃO CENTRAL (A caixa branca de conteúdo)
-   ========================================================================== */
-.card-container {
-  background: #ffffff; 
-  
-  /* Muito espaçamento interno para dar um visual "clean" e não deixar o texto espremido. */
-  padding: 3.5rem 2.5rem; 
-  
-  /* Cantos levemente arredondados, padrão moderno da Apple/Google. */
-  border-radius: 24px; 
-  
-  /* Uma sombra maior e um pouco mais densa que a da navbar, dando sensação de peso. */
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); 
-  
-  text-align: center; 
-  
-  /* Empurra o cartão 5rem para baixo, distanciando-o da Navbar. */
-  margin-top: 5rem; 
-  
-  /* Impede que o cartão fique gigante em telas de PC. Trava em 500px. */
-  max-width: 500px; 
-  width: 100%; 
+.hero-card {
+  background: white;
+  padding: 3rem;
+  border-radius: 24px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
 }
 
-.card-container h1 {
-  color: #1a1a1a; /* Um cinza quase preto (menos agressivo aos olhos que o preto #000 puro). */
-  margin-bottom: 0.5rem; 
-  font-size: 1.8rem; 
+.hero-card h1 { color: #5755FE; margin-bottom: 0.5rem; }
+.hero-card p { color: #666; margin-bottom: 2rem; }
+
+/* Grid para Semana e Gráfico lado a lado */
+.widgets-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
 }
 
-.card-container p {
-  color: #666666; /* Cinza médio para o subtítulo. */
-  margin-bottom: 2.5rem; /* Empurra os botões lá para baixo. */
-  font-size: 1rem; 
+.widget-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 24px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
 }
 
-/* ==========================================================================
-   BOTÕES (Organização e Estilos base)
-   ========================================================================== */
-.btn-group {
-  display: flex; /* Coloca os botões lado a lado. */
-  gap: 1rem; /* Define a distância exata de 1rem entre um botão e outro (sem precisar usar margens). */
-  justify-content: center; /* Centraliza os botões no meio da div. */
+.widget-card h3 {
+  font-size: 1.1rem;
+  color: #5755FE;
+  margin: 0 0 1.5rem 0;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 0.5rem;
 }
 
-/* Agrupamento: Aplica o mesmo estilo para o botão primário E o secundário de uma vez só. */
-.btn-primary, .btn-secondary {
-  padding: 0.8rem 1.5rem; /* Altura e largura do clique do botão. */
-  border-radius: 12px; /* Borda arredondadinha. */
-  font-weight: 600; /* Texto em semi-negrito. */
-  font-size: 0.95rem; 
-  cursor: pointer; /* Muda o ícone do mouse para a "mãozinha" de clique. */
-  border: none; /* Remove a borda feia padrão do navegador. */
-  
-  /* Prepara as animações de movimento e de sombra para quando o mouse passar por cima. */
-  transition: transform 0.2s ease, box-shadow 0.2s ease; 
-}
+/* Tabela da Semana */
 
-/* ==========================================================================
-   CORES E ANIMAÇÕES ESPECÍFICAS DE CADA BOTÃO
-   ========================================================================== */
-/* O botão que chama mais atenção (Ação principal) */
-.btn-primary {
-  background: #5755FE; /* Roxo sólido. */
-  color: white; 
-}
-
-.btn-primary:hover {
-  transform: translateY(-3px); /* "Pula" 3 pixels para cima. */
-  
-  /* Adiciona uma sombra roxa para fazer o botão "brilhar" quando o mouse passa. */
-  box-shadow: 0 8px 20px rgba(87, 85, 254, 0.35); 
-}
-
-/* O botão menos chamativo (Ação secundária) */
-.btn-secondary {
-  background: #f3f4f6; /* Um cinza beeeeem clarinho. */
-  color: #374151; /* Texto chumbo escuro. */
-}
-
-.btn-secondary:hover {
-  background: #e5e7eb; /* O fundo cinza escurece um pouquinho quando passa o mouse. */
-  transform: translateY(-3px); /* Também "pula" 3 pixels para cima para manter a consistência com o outro. */
-}
+/* Botões da Hero */
+.btn-group { display: flex; gap: 1rem; justify-content: center; }
+.btn-primary, .btn-secondary { padding: 0.8rem 1.5rem; border-radius: 12px; font-weight: 600; cursor: pointer; border: none; }
+.btn-primary { background: #5755FE; color: white; }
+.btn-secondary { background: #f3f4f6; color: #374151; }

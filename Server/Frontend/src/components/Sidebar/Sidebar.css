@@ -1,0 +1,60 @@
+/* =========================================================
+   BARRA LATERAL DIREITA
+   ========================================================= */
+.sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  width: 80px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+  z-index: 100;
+}
+
+.menu-icons {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.icon-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+
+.icon-btn:hover, .icon-btn.active {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.avatar {
+  width: 45px;
+  height: 45px;
+  background: white;
+  color: #5755FE;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.info-btn {
+  margin-top: auto;
+}

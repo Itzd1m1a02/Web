@@ -1,0 +1,58 @@
+/* =========================================================
+   WIDGET CALENDÁRIO DA SEMANA
+   ========================================================= */
+.widget-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 24px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.widget-card h3 {
+  font-size: 1.1rem;
+  color: #5755FE;
+  margin: 0 0 1.5rem 0;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 0.5rem;
+}
+
+/* Tabela da Semana */
+.week-table {
+  display: flex;
+  justify-content: space-between;
+}
+
+.week-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.day-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.task-dots {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.task-dots .dot {
+  display: block;
+  width: 8px;
+  height: 8px;
+  background: #eee;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.task-dots .dot.active {
+  background: #FF4747;
+  box-shadow: 0 0 8px rgba(255, 71, 71, 0.6);
+  transform: scale(1.2);
+}
