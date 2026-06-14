@@ -11,6 +11,16 @@ from ..security import obter_usuario_atual
 
 router = APIRouter(prefix="/api", tags=["Tarefas"])
 
+@router.get("/Tarefas")
+async def listar_tarefas(
+    usuario_atual: Any = Depends(obter_usuario_atual),
+    db: Session = Depends(get_db),
+):
+    repo = TarefaRepository(db)
+    # Usa o método buscar_por_usuario que você já declarou no TarefaRepository
+    tarefas = repo.buscar_por_usuario(int(usuario_atual.id)) 
+    return tarefas
+
 @router.post("/NovaTarefa", status_code=status.HTTP_201_CREATED)
 async def criar_tarefa(
     dados: TarefaCreate,
@@ -26,7 +36,6 @@ async def criar_tarefa(
         user_id=int(usuario_atual.id),
     )
     
-
     repo.salvar_nova_tarefa(nova_tarefa)
 
     return {"mensagem": "Tarefa criada com sucesso!"}

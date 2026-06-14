@@ -4,7 +4,7 @@ import './JanelaNovaTarefa.css'; // Apontando para o CSS específico do Modal
 import { getAccessToken } from '../../utils/auth';
 
 // 1. Definimos o que o Modal recebe da página que o chamou
-interface ModalNovaTarefaProps {
+interface JanelaNovaTarefaProps {
     aoFechar: () => void;
 }
 
@@ -17,7 +17,7 @@ interface TarefaDados {
 }
 
 // 2. A função agora recebe as 'props' e extrai o 'aoFechar'
-export function ModalNovaTarefa({ aoFechar }: ModalNovaTarefaProps) {
+export function JanelaNovaTarefa({ aoFechar }: JanelaNovaTarefaProps) {
     const [nome, setNome] = useState('');
     const [tipo, setTipo] = useState('');
     const [datalimite, setDataLimite] = useState('');

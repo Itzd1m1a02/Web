@@ -35,7 +35,9 @@ A aplicação permite que usuários criem, organizem e gerenciem suas rotinas di
   
 - ✅ **Gerenciamento de Tarefas**
   - Criação de novas tarefas
+  - Leitura de tarefas do usuário autenticado
   - Rota backend `POST /api/NovaTarefa`
+  - Rota backend `GET /api/Tarefas` retorna apenas as tarefas do usuário logado
   - Modelos de dados estruturados com Pydantic
   
 - ✅ **Segurança**
@@ -72,6 +74,7 @@ A aplicação permite que usuários criem, organizem e gerenciem suas rotinas di
   - Garantir que dados de rotinas sejam salvos apenas para o usuário autenticado
   - Validação de propriedade em todas as operações de leitura/escrita
   - Implementar soft delete para auditoria
+- [x] **Rota `GET /api/Tarefas`** implementada para retornar somente tarefas associadas ao usuário logado via JWT
   
 ### 🤖 Inteligência Artificial
 - [ ] **Integração Completa com Gemini API**
@@ -84,6 +87,7 @@ A aplicação permite que usuários criem, organizem e gerenciem suas rotinas di
   - Visualização de tarefas por data
   - Navegação entre meses
   - Marcação de prazos importantes
+- [x] **Calendário Mensal** agora consome `GET /api/Tarefas` e exibe apenas as tarefas do usuário autenticado
   
 - [ ] **Gráficos e Estatísticas**
   - Gráficos de produtividade

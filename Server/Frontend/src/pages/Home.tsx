@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import '../css/Home.css';
-import { ModalNovaTarefa } from '../components/JanelaNovaTarefa/JanelaNovaTarefa';
+import { JanelaNovaTarefa } from '../components/JanelaNovaTarefa/JanelaNovaTarefa';
 import { Sidebar } from '../components/Sidebar/Sidebar';
 import { CalendarioMensal } from '../components/CalendarioMensal/CalendarioMensal';
 import { CalendarioSemana } from '../components/CalendarioSemana/CalendarioSemana';
@@ -9,6 +9,17 @@ import { GerenciadorTarefas } from '../components/GerenciadorTarefas/Gerenciador
 
 export function Home() {
   const [modalAberto, setModalAberto] = useState(false);
+
+  // 1. CRIANDO O TRIGGER DE ATUALIZAÇÃO
+  const [triggerRefresh, setTriggerRefresh] = useState(0); 
+
+  // Função que será chamada quando o modal fechar
+  const lidarComFechamentoModal = () => {
+    setModalAberto(false);
+    // Somamos +1 para quebrar a igualdade anterior. O React vai perceber e forçar 
+    // os useEffects dos componentes filhos a rodarem de novo!
+    setTriggerRefresh(prev => prev + 1);
+  };
 
   // Função para rolar suavemente para o Home
   const rolarParaHome = () => {
@@ -36,7 +47,6 @@ export function Home() {
 
   return (
     <div className="scroll-container">
-      
       {/* Componente Sidebar */}
       <Sidebar onHomeClick={rolarParaHome} onCalendarClick={rolarParaCalendario} onTasksClick={rolarParaTarefas} />
 
@@ -72,7 +82,8 @@ export function Home() {
           SEÇÃO 2: CALENDÁRIO MENSAL COMPLETO
           ========================================== */}
       <section className="scroll-section" id="sessao-mensal">
-        <CalendarioMensal />
+        {/* 2. INJETANDO A PROP DE RECARREGAR */}
+        <CalendarioMensal atualizacaoTrigger={triggerRefresh} />
       </section>
 
       {/* ==========================================
@@ -83,7 +94,7 @@ export function Home() {
       </section>
 
       {/* Modal Renderizado por cima de tudo */}
-      {modalAberto && <ModalNovaTarefa aoFechar={() => setModalAberto(false)} />}
+      {modalAberto && <JanelaNovaTarefa aoFechar={() => setModalAberto(false)} />}
       
     </div>
   );
