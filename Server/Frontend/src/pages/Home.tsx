@@ -1,16 +1,37 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../css/Home.css';
 import { ModalNovaTarefa } from '../components/JanelaNovaTarefa/JanelaNovaTarefa';
 import { Sidebar } from '../components/Sidebar/Sidebar';
 import { ContainerCalendarios } from '../components/ContainerCalendarios/ContainerCalendarios';
 import { CalendarioSemana } from '../components/CalendarioSemana/CalendarioSemana';
 import { GraficoStatus } from '../components/GraficoStatus/GraficoStatus';
-import { GerenciadorTarefas } from '../components/GerenciadorTarefas/GerenciadorTarefas';
+import { GerenciadorTarefas, type Tarefa } from '../components/GerenciadorTarefas/GerenciadorTarefas';
 import { PainelIA } from '../components/PainelIA/PainelIA';
+import { apiFetch } from '../utils/api';
 
 export function Home() {
   const [modalAberto, setModalAberto] = useState(false);
   const [tarefasRefresh, setTarefasRefresh] = useState(0);
+  const [tarefas, setTarefas] = useState<Tarefa[]>([]);
+
+  useEffect(() => {
+    const fetchTarefas = async () => {
+      try {
+        const response = await apiFetch('/Tarefas');
+        if (!response.ok) {
+          console.error('Erro ao buscar tarefas do dashboard:', response.statusText);
+          return;
+        }
+
+        const data = await response.json();
+        setTarefas(Array.isArray(data) ? data : []);
+      } catch (error) {
+        console.error('Erro ao buscar tarefas do dashboard:', error);
+      }
+    };
+
+    fetchTarefas();
+  }, [tarefasRefresh]);
 
   // Função para rolar suavemente para o Home
   const rolarParaHome = () => {
@@ -73,7 +94,19 @@ export function Home() {
           {/* Widgets Inferiores (Semana e Gráfico) */}
           <div className="widgets-grid">
             <CalendarioSemana key={`semana-${tarefasRefresh}`} />
-            <GraficoStatus key={`grafico-${tarefasRefresh}`} completas={65} atrasadas={15} semPrazo={20} />
+            <GraficoStatus
+              key={`grafico-${tarefasRefresh}`}
+              completas={tarefas.filter((tarefa) => tarefa.status === 'completa').length}
+              pendentes={tarefas.filter((tarefa) => tarefa.status === 'pendente' || !tarefa.status).length}
+              atrasadas={tarefas.filter((tarefa) => {
+                if (!tarefa.datalimite) return false;
+                const prazo = new Date(tarefa.datalimite + 'T00:00:00');
+                const hoje = new Date();
+                hoje.setHours(0, 0, 0, 0);
+                return prazo < hoje && tarefa.status !== 'completa';
+              }).length}
+              semPrazo={tarefas.filter((tarefa) => !tarefa.datalimite).length}
+            />
           </div>
         </div>
       </section>
