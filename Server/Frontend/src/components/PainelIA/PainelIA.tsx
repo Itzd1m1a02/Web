@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import './PainelIA.css'; // Crie este arquivo para os estilos abaixo, se desejar
 import { getAccessToken } from '../../utils/auth';
 import { apiFetch } from '../../utils/api';
 
-export function PainelIA() {
+interface PainelIAProps {
+  onTarefaAdicionada?: () => void;
+}
+
+export function PainelIA({ onTarefaAdicionada }: PainelIAProps) {
   const [direcionamento, setDirecionamento] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [erro, setErro] = useState<string>('');
+
+  const resetPrompt = () => {
+    setDirecionamento('');
+    setErro('');
+    setLoading(false);
+  };
 
   const pedirDirecionamento = async () => {
     setLoading(true);
@@ -31,7 +41,11 @@ export function PainelIA() {
 
       const data = await response.json();
       setDirecionamento(data.direcionamento);
-      
+
+      // Atualiza apenas se a IA retornou um resultado válido
+      if (onTarefaAdicionada && data.direcionamento) {
+        onTarefaAdicionada();
+      }
     } catch (err: any) {
       setErro('Erro ao consultar a IA. Verifique sua conexão ou a chave da API.');
       console.error(err);
@@ -47,13 +61,23 @@ export function PainelIA() {
         <p>A IA analisa suas tarefas pendentes e te diz o que priorizar.</p>
       </div>
 
-      <button 
-        className="btn-ia" 
-        onClick={pedirDirecionamento} 
-        disabled={loading}
-      >
-        {loading ? 'Analisando suas tarefas...' : 'O que devo fazer primeiro?'}
-      </button>
+      <div className="ia-actions">
+        <button 
+          className="btn-ia" 
+          onClick={pedirDirecionamento} 
+          disabled={loading}
+        >
+          {loading ? 'Analisando suas tarefas...' : 'O que devo fazer primeiro?'}
+        </button>
+        <button
+          className="btn-reset"
+          type="button"
+          onClick={resetPrompt}
+          disabled={loading}
+        >
+          Limpar resultado
+        </button>
+      </div>
 
       {erro && <p className="ia-erro">{erro}</p>}
 

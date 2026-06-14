@@ -48,7 +48,8 @@ A aplicação permite que usuários criem, organizem e gerenciem suas rotinas di
 - ✅ **Integração IA Completa**
   - Painel integrado à API do Google Gemini
   - Gerar rotinas inteligentes com base em preferências do usuário
-  - Sugestões automáticas de otimização de tempo
+  - Recomendações semanais com prioridades de tarefas e plano de execução
+  - Janela de resultado refinada com scroll e botão para limpar resultado
 
 - ✅ **Qualidade de Código e Testes**
   - Rotas padronizadas com tratamento de erros unificado

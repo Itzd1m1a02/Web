@@ -41,10 +41,13 @@ O usuário possui as seguintes tarefas pendentes:
 {tarefas_texto}
 
 Baseado nessas tarefas (considerando urgência pela data limite e importância pelo tipo da tarefa), forneça:
-1. Um direcionamento claro de qual tarefa o usuário deve priorizar e fazer primeiro, explicando o porquê.
-2. Duas ou três pequenas dicas práticas de como começar ou realizar essa tarefa principal.
+1. Um plano semanal cobrindo todas as tarefas pendentes, distribuindo-as pelos próximos 7 dias.
+2. Uma classificação de prioridade para cada tarefa (alta, média, baixa) e um breve motivo para essa prioridade.
+3. Para cada tarefa, indique o dia ideal da semana para realizá-la e uma ação inicial clara.
+4. Duas ou três dicas gerais para organizar a semana e manter o foco.
 
-Seja direto, encorajador e amigável. Retorne apenas o texto da sua resposta, sem formatação JSON. Pode usar formatação markdown leve (como negrito e listas).
+Use formatação markdown leve com títulos e listas, de forma clara e organizada para aproveitar bem o espaço da página.
+Retorne apenas o texto da resposta, sem JSON.
 """
 
     candidate_models = [
