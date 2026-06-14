@@ -12,7 +12,7 @@ A aplicação permite que usuários criem, organizem e gerenciem suas rotinas di
 
 ### **Backend** (FastAPI + Python)
 - **Framework:** FastAPI com Uvicorn
-- **Banco de Dados:** SQLAlchemy ORM
+- **Banco de Dados:** SQLite (embutido usando SQLAlchemy ORM)
 - **Autenticação:** JWT com passlib/bcrypt
 - **IA Integrada:** Google GenAI (Gemini API)
 - **Estrutura:** Modular com rotas, modelos, schemas e repositórios
@@ -21,7 +21,7 @@ A aplicação permite que usuários criem, organizem e gerenciem suas rotinas di
 - **Framework:** React 19 com TypeScript
 - **Build:** Vite
 - **Roteamento:** React Router v7
-- **Estilo:** CSS modularizado
+- **Estilo:** CSS 3 (Responsividade, Animações e Glassmorphism)
 - **Linting:** ESLint com suporte a React
 
 ---
@@ -32,22 +32,27 @@ A aplicação permite que usuários criem, organizem e gerenciem suas rotinas di
 - ✅ **Autenticação e Autorização**
   - Sistema de registro (cadastro) de usuários
   - Login com geração de tokens JWT
+  - Administrador "Bypass": Conta fixa imune a limpezas de banco de dados
   
-- ✅ **Gerenciamento de Tarefas**
-  - Criação de novas tarefas
-  - Leitura de tarefas do usuário autenticado
+- ✅ **Gerenciamento de Tarefas (CRUD Completo)**
+  - Criação, leitura, edição e exclusão de tarefas (Provas, Listas, Projetos e Compromissos)
   - Rota backend `POST /api/NovaTarefa`
-  - Rota backend `GET /api/Tarefas` retorna apenas as tarefas do usuário logado
-  - Modelos de dados estruturados com Pydantic
+  - Rota backend `GET /api/Tarefas` implementada para retornar somente tarefas associadas ao usuário logado via JWT (Isolamento de Dados)
+  - Modelos de dados estruturados e validados com Pydantic
   
 - ✅ **Segurança**
   - Senha criptografada com bcrypt
   - Middlewares de logging
   - Validação de entrada com schemas
   
-- ✅ **Integração IA (Parcial)**
-  - Dependência do Google GenAI presente
-  - Base para integração futura
+- ✅ **Integração IA Completa**
+  - Painel integrado à API do Google Gemini
+  - Gerar rotinas inteligentes com base em preferências do usuário
+  - Sugestões automáticas de otimização de tempo
+
+- ✅ **Qualidade de Código e Testes**
+  - Rotas padronizadas com tratamento de erros unificado
+  - Testes unitários para modelos e E2E implementados
 
 ### Frontend
 - ✅ **Páginas Principais**
@@ -59,9 +64,17 @@ A aplicação permite que usuários criem, organizem e gerenciem suas rotinas di
   
 - ✅ **Componentes**
   - Navbar com navegação
-  - Página para criar novas tarefas
   - Gráfico de status com contagem dinâmica de tarefas
   
+- ✅ **Calendário Mensal e Semanal**
+  - Consome a API e exibe os afazeres distribuídos de forma orgânica e apenas referentes ao usuário autenticado
+  
+- ✅ **UX para Verificação de Prazos**
+  - Alertas visuais para tarefas vencidas
+  - Indicadores de urgência
+  - Timeline de tarefas próximas
+  - Notificações de prazos próximos
+
 - ✅ **Responsividade**
   - CSS global e específico por página
   - Estrutura pronta para responsividade
@@ -71,52 +84,17 @@ A aplicação permite que usuários criem, organizem e gerenciem suas rotinas di
 ## 🚧 Funcionalidades a Implementar
 
 ### 🔒 Segurança e Dados
-- [x] **Isolamento de Dados por Usuário**
-  - Garantir que dados de rotinas sejam salvos apenas para o usuário autenticado
-  - Validação de propriedade em todas as operações de leitura/escrita
-  - Implementar soft delete para auditoria
-- [x] **Rota `GET /api/Tarefas`** implementada para retornar somente tarefas associadas ao usuário logado via JWT
-  
-### 🤖 Inteligência Artificial
-- [ ] **Integração Completa com Gemini API**
-  - Gerar rotinas inteligentes com base em preferências do usuário
-  - Sugestões automáticas de otimização de tempo
-  - Análise de produtividade e recomendações
+- [ ] **Auditoria de Dados**
+  - Implementar soft delete para lixeira de tarefas
   
 ### 📅 Interface e Visualização
-- [ ] **Calendário Interativo**
-  - Visualização de tarefas por data
-  - Navegação entre meses
-  - Marcação de prazos importantes
-- [x] **Calendário Mensal** agora consome `GET /api/Tarefas` e exibe apenas as tarefas do usuário autenticado
-  
 - [ ] **Gráficos e Estatísticas**
   - Gráficos de produtividade
   - Visualização de conclusão de tarefas
   - Análise temporal de progresso
   - Gráficos de carga de trabalho
   
-- [ ] **UX para Verificação de Prazos**
-  - Alertas visuais para tarefas vencidas
-  - Indicadores de urgência
-  - Timeline de tarefas próximas
-  - Notificações de prazos próximos
-  
 ### 🎨 Padrão e Qualidade de Código
-- [x] **Adição de id de Usuario para salvas tarefas referentes a ele**
-   
-- [ ] **Padronização de Funções**
-  - Refatorar rotas para padrão consistente
-  - Unificar tratamento de erros
-  - Criar utilitários reutilizáveis
-  - Padronizar nomeação de variáveis e funções
-  - Implementar validações genéricas
-  
-- [ ] **Testes Automatizados**
-  - Testes unitários para modelos
-  - Testes de integração para rotas
-  - Testes E2E para fluxos críticos
-  
 - [ ] **Documentação**
   - Comentários no código
   - Documentação de APIs (Swagger/OpenAPI)
@@ -125,6 +103,12 @@ A aplicação permite que usuários criem, organizem e gerenciem suas rotinas di
 ---
 
 ## 🚀 Como Executar
+
+### Configurar a Chave da IA
+Antes de rodar o projeto, crie um arquivo `.env` dentro da pasta `Server/Backend/` e adicione a sua chave de API do Google Gemini:
+```env
+GEMINI_API_KEY=sua_chave_secreta_aqui
+```
 
 ### Pré-requisitos
 - Python 3.8+
@@ -147,10 +131,10 @@ npm run dev
 ```
 A aplicação rodará em `http://localhost:5173`
 
-### Inicalizador
+### Inicializador
 ```powershell
 cd Server
-iniciar.bat
+Iniciar.bat
 ```
 A aplicação rodará os dois comandos acima e instalará bibliotecas importantes para o uso da aplicação
 ###
@@ -211,17 +195,14 @@ Projeto WEB/
 
 ## 📋 Próximos Passos Prioritários
   
-1. **Calendário (ALTA PRIORIDADE)**
-   - Implementar visualização de tarefas em calendário
-   
-2. **IA Gemini (MÉDIA PRIORIDADE)**
-   - Completar integração para geração de rotinas
-   
-3. **Gráficos (MÉDIA PRIORIDADE)**
+1. **Gráficos (ALTA PRIORIDADE)**
    - Adicionar biblioteca de gráficos (Chart.js ou similar)
    
-4. **Padrão de Código (CONTÍNUO)**
-   - Refatorar durante o desenvolvimento das outras features
+2. **Auditoria de Dados (MÉDIA PRIORIDADE)**
+   - Implementar a lixeira de tarefas (soft delete)
+
+3. **Documentação (CONTÍNUO)**
+   - Melhorar guia de contribuição e Swagger/OpenAPI
 
 ---
 
@@ -237,5 +218,4 @@ MIT License
 
 ---
 
-**Última atualização:** 1 de junho de 2026
-
+**Última atualização:** 14 de junho de 2026
