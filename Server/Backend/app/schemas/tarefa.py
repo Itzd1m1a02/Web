@@ -7,3 +7,10 @@ class TarefaCreate(BaseModel):
     datalimite: str
     observacoes: Optional[str] = None
     user_id: int
+
+class TarefaUpdate(BaseModel):
+    nome: Optional[str] = None
+    tipo: Optional[str] = None
+    datalimite: Optional[str] = None
+    observacoes: Optional[str] = None
+    status: Optional[str] = None

@@ -1,0 +1,1 @@
+# Identifica a pasta routes como um pacote Python

@@ -1,0 +1,97 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-edicao {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-edicao h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+  font-size: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #4b5563;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 0.8rem;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #5755FE;
+}
+
+.form-group select:focus {
+  outline: none;
+  border-color: #5755FE; /* Cor padrão */
+}
+
+/* Bordas coloridas PERMANENTEMENTE baseadas no data-tipo selecionado */
+.form-group select[data-tipo="Prova"],
+.form-group select[data-tipo="Prova"]:focus { border-color: #EF4444; }
+
+.form-group select[data-tipo="Lista de Exercício"],
+.form-group select[data-tipo="Lista de Exercício"]:focus { border-color: #08ad08; }
+
+.form-group select[data-tipo="Compromisso"],
+.form-group select[data-tipo="Compromisso"]:focus { border-color: #3B82F6; }
+
+.form-group select[data-tipo="Projeto"],
+.form-group select[data-tipo="Projeto"]:focus { border-color: #8B5CF6; }
+
+.form-group select[data-tipo="Outro"],
+.form-group select[data-tipo="Outro"]:focus { border-color: #9CA3AF; }
+
+.modal-acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* Como as classes btn-salvar e btn-cancelar já existem nos arquivos 
+globais / outras modais, elas herdarão os estilos perfeitamente, 
+mas você pode personalizá-las individualmente aqui se quiser. */

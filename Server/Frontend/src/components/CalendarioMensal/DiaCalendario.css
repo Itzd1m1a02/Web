@@ -62,12 +62,12 @@
 }
 
 /* Cores das Categorias - Exatamente como você desenhou */
-.tarefa-tag.prova { background: #EF4444; }
-.tarefa-tag.lista { background: #F59E0B; }
-.tarefa-tag.compromisso { background: #44c7ef; }
-.tarefa-tag.projeto { background: #5755FE; }
-.tarefa-tag.trabalho { background: #10B981; } 
-.tarefa-tag.padrao { background: #94A3B8; }
+.tarefa-tag.prova, .tarefa-tag.Prova { background: #EF4444; }
+.tarefa-tag.lista, .tarefa-tag.Lista, 
+.tarefa-tag.lista-de-exercício, .tarefa-tag.lista-de-exercicio { background: #08ad08; }
+.tarefa-tag.compromisso, .tarefa-tag.Compromisso { background: #3B82F6; }
+.tarefa-tag.projeto, .tarefa-tag.Projeto { background: #8B5CF6; }
+.tarefa-tag.outro, .tarefa-tag.Outro, .tarefa-tag.padrao { background: #9CA3AF; }
 
 .indicador-mais {
   font-size: 0.75rem;
@@ -163,12 +163,12 @@
 }
 
 /* Replicando as cores nas bordas esquerdas do Modal */
-.modal-tarefa-item.prova { border-left-color: #EF4444; }
-.modal-tarefa-item.compromisso { border-left-color: #44c7ef; }
-.modal-tarefa-item.projeto { border-left-color: #5755FE; }
-.modal-tarefa-item.lista { border-left-color: #F59E0B; }
-.modal-tarefa-item.trabalho { border-left-color: #10B981; }
-.modal-tarefa-item.padrao { border-left-color: #94A3B8; }
+.modal-tarefa-item.prova, .modal-tarefa-item.Prova { border-left-color: #EF4444; }
+.modal-tarefa-item.lista, .modal-tarefa-item.Lista, 
+.modal-tarefa-item.lista-de-exercício, .modal-tarefa-item.lista-de-exercicio { border-left-color: #08ad08; }
+.modal-tarefa-item.compromisso, .modal-tarefa-item.Compromisso { border-left-color: #3B82F6; }
+.modal-tarefa-item.projeto, .modal-tarefa-item.Projeto { border-left-color: #8B5CF6; }
+.modal-tarefa-item.outro, .modal-tarefa-item.Outro, .modal-tarefa-item.padrao { border-left-color: #9CA3AF; }
 
 .modal-tarefa-badge {
   font-size: 0.75rem;

@@ -4,9 +4,10 @@ interface SidebarProps {
   onHomeClick: () => void;
   onCalendarClick: () => void;
   onTasksClick: () => void;
+  onIAClick?: () => void;
 }
 
-export function Sidebar({ onHomeClick, onCalendarClick, onTasksClick }: SidebarProps) {
+export function Sidebar({ onHomeClick, onCalendarClick, onTasksClick, onIAClick }: SidebarProps) {
   return (
     <nav className="sidebar">
       <div className="avatar">D</div>
@@ -19,6 +20,9 @@ export function Sidebar({ onHomeClick, onCalendarClick, onTasksClick }: SidebarP
         </button>
         <button className="icon-btn" onClick={onTasksClick}>
           📊
+        </button>
+        <button className="icon-btn" onClick={onIAClick} title="Sugestões IA">
+          ✨
         </button>
         <button className="icon-btn">⚙️</button>
       </div>

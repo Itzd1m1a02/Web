@@ -1,0 +1,1 @@
+# Identifica a pasta schemas como um pacote Python

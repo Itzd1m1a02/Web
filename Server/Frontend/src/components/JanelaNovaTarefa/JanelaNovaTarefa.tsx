@@ -2,10 +2,12 @@ import { useState } from 'react';
 import type { FormEvent } from 'react';
 import './JanelaNovaTarefa.css'; // Apontando para o CSS específico do Modal
 import { getAccessToken } from '../../utils/auth';
+import { apiFetch } from '../../utils/api';
 
 // 1. Definimos o que o Modal recebe da página que o chamou
-interface JanelaNovaTarefaProps {
+interface ModalNovaTarefaProps {
     aoFechar: () => void;
+    onSucesso?: () => void;
 }
 
 interface TarefaDados {
@@ -17,7 +19,7 @@ interface TarefaDados {
 }
 
 // 2. A função agora recebe as 'props' e extrai o 'aoFechar'
-export function JanelaNovaTarefa({ aoFechar }: JanelaNovaTarefaProps) {
+export function ModalNovaTarefa({ aoFechar, onSucesso }: ModalNovaTarefaProps) {
     const [nome, setNome] = useState('');
     const [tipo, setTipo] = useState('');
     const [datalimite, setDataLimite] = useState('');
@@ -46,12 +48,8 @@ export function JanelaNovaTarefa({ aoFechar }: JanelaNovaTarefaProps) {
                 return;
             }
 
-            const response = await fetch('http://127.0.0.1:8000/api/NovaTarefa', {
+            const response = await apiFetch('/NovaTarefa', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
                 body: JSON.stringify(novaTarefa),
             });
 
@@ -59,6 +57,9 @@ export function JanelaNovaTarefa({ aoFechar }: JanelaNovaTarefaProps) {
 
             if (response.ok) {
                 alert(resultado.mensagem || 'Tarefa criada com sucesso!');
+                if (onSucesso) {
+                    onSucesso();
+                }
                 // 3. Em vez de navegar para outra página, apenas fechamos o Modal!
                 aoFechar(); 
             } else {

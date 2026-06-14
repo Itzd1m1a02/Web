@@ -1,0 +1,14 @@
+# Python (Caches e Arquivos Compilados)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Banco de Dados SQLite
+biscoito.db
+*.db
+*.sqlite3
+
+# Frontend (Node, dependências e build)
+node_modules/
+dist/
+.env

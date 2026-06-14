@@ -1,0 +1,1 @@
+# Identifica a pasta app como um pacote Python

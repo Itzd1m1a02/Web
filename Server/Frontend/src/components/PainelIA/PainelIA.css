@@ -1,0 +1,17 @@
+/* Altera a lista de tarefas padrão para um layout de grade responsivo */
+.grid-sugestoes {
+  display: grid;
+  /* Cria colunas automáticas que não ficam menores que 300px */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.grid-sugestoes .tarefa-card {
+  margin-bottom: 0; /* Remove a margem extra da lista tradicional */
+}
+
+/* Reduz o comprimento do botão "Gerar Novas Ideias" em 50% */
+.gerenciador-header .btn-criar-tarefa {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}

@@ -112,6 +112,13 @@
   transition: all 0.3s ease;
 }
 
+/* Cores das bordas laterais baseadas no tipo da tarefa */
+.tarefa-card[data-tipo="Prova"] { border-left-color: #EF4444; }
+.tarefa-card[data-tipo="Lista de Exercício"] { border-left-color: #08ad08; }
+.tarefa-card[data-tipo="Compromisso"] { border-left-color: #3B82F6; }
+.tarefa-card[data-tipo="Projeto"] { border-left-color: #8B5CF6; }
+.tarefa-card[data-tipo="Outro"] { border-left-color: #9CA3AF; }
+
 .tarefa-card:hover {
   box-shadow: 0 15px 35px rgba(87, 85, 254, 0.15);
   transform: translateY(-3px);
@@ -145,18 +152,6 @@
   gap: 0.6rem;
   flex-wrap: wrap;
 }
-
-.badge {
-  padding: 0.4rem 0.8rem;
-  border-radius: 8px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.badge.status { background-color: #e0e7ff; color: #ffffff; }
-.badge.prioridade { background-color: #fef3c7; color: #ffffff; }
 
 /* ========== FOOTER DA TAREFA ========== */
 .tarefa-footer {
