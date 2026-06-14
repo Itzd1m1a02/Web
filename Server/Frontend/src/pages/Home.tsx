@@ -2,7 +2,7 @@ import { useState } from 'react';
 import '../css/Home.css';
 import { ModalNovaTarefa } from '../components/JanelaNovaTarefa/JanelaNovaTarefa';
 import { Sidebar } from '../components/Sidebar/Sidebar';
-import { CalendarioMensal } from '../components/CalendarioMensal/CalendarioMensal';
+import { ContainerCalendarios } from '../components/ContainerCalendarios/ContainerCalendarios';
 import { CalendarioSemana } from '../components/CalendarioSemana/CalendarioSemana';
 import { GraficoStatus } from '../components/GraficoStatus/GraficoStatus';
 import { GerenciadorTarefas } from '../components/GerenciadorTarefas/GerenciadorTarefas';
@@ -82,7 +82,7 @@ export function Home() {
           SEÇÃO 2: CALENDÁRIO MENSAL COMPLETO
           ========================================== */}
       <section className="scroll-section" id="sessao-mensal">
-        <CalendarioMensal key={`mensal-${tarefasRefresh}`} />
+        <ContainerCalendarios atualizacaoTrigger={tarefasRefresh} />
       </section>
 
       {/* ==========================================

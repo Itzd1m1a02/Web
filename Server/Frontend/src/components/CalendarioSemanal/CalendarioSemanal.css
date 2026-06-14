@@ -1,0 +1,27 @@
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  
+  /* Aqui está o truque: a 1ª linha (Cabeçalho DOM/SEG/TER) ocupa espaço automático ('auto').
+     A 2ª linha (as células com as tarefas) ganha todo o resto do espaço disponível ('1fr') */
+  grid-template-rows: auto 1fr; 
+  gap: 10px;
+  
+  /* Faz a grade esticar preenchendo a caixa pai */
+  flex: 1; 
+}
+
+/* O Cabeçalho com o nome das semanas */
+.week-grid .grid-header {
+  text-align: center;
+  font-weight: bold;
+  color: #666;
+  padding-bottom: 10px;
+}
+
+/* Forçamos o componente de dia a obedecer ao esticamento do CSS Grid 
+  sem quebrar o visual interno! 
+*/
+.week-grid .dia-calendario {
+  height: 100%;
+}

@@ -3,38 +3,76 @@
    ========================================================= */
 .sidebar {
   position: fixed;
-  right: 0;
-  top: 0;
-  height: 100vh;
+  
+  /* 1. Descolando das bordas (16px de distância) */
+  right: 16px;
+  top: 16px;
+  /* A altura precisa compensar os 16px de cima e os 16px de baixo (total 32px) */
+  height: calc(100vh - 32px); 
+  
   width: 80px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px);
-  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  
+  /* 2. Efeito Transparente (Glassmorphism mais refinado) */
+  background: rgba(255, 255, 255, 0.08); /* Levemente mais branco para destacar do fundo */
+  backdrop-filter: blur(20px); /* Blur um pouco mais forte */
+  -webkit-backdrop-filter: blur(20px); /* Suporte para navegadores Safari */
+  
+  /* 3. Cantos e Bordas */
+  border-radius: 24px; /* Cantos bem arredondados */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Borda em todos os lados (antes era só na esquerda) */
+  
+  /* 4. Sombra para dar a ilusão de que está flutuando acima da página */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+  
+  /* Mantendo as propriedades flexíveis originais do seu código */
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem 0;
   z-index: 100;
+  justify-content: space-between;
 }
 
 .menu-icons {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  margin-top: 2rem;
+  align-items: center;
+  width: 100%;
+  gap: 16px;
+}
+
+.menu-top,
+.menu-bottom {display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  flex: 1;
+}
+
+.menu-top {
+  justify-content: flex-start; /* Mantém o perfil colado lá em cima */
+}
+
+.menu-bottom {
+  justify-content: flex-end; /* Mantém as configs coladas lá embaixo */
+  gap: 16px;
 }
 
 .icon-btn {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  font-size: 1.5rem;
   color: white;
   cursor: pointer;
   width: 45px;
   height: 45px;
   border-radius: 12px;
   transition: all 0.2s;
+  
+  /* A MÁGICA DA CENTRALIZAÇÃO AQUI */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0; /* Remove o espaçamento invisível padrão do navegador */
 }
 
 .icon-btn:hover, .icon-btn.active {
@@ -42,19 +80,8 @@
   transform: scale(1.1);
 }
 
-.avatar {
-  width: 45px;
-  height: 45px;
-  background: white;
-  color: #5755FE;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
-.info-btn {
-  margin-top: auto;
+.icone-botao {
+  width: 27px;  /* Aumentado de 20px para 24px */
+  height: 27px;
+  object-fit: contain; /* Garante que a imagem não distorça */
 }
