@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../css/Home.css';
 import { JanelaNovaTarefa } from '../components/JanelaNovaTarefa/JanelaNovaTarefa';
 import { Sidebar } from '../components/Sidebar/Sidebar';
@@ -6,12 +6,83 @@ import { CalendarioMensal } from '../components/CalendarioMensal/CalendarioMensa
 import { CalendarioSemana } from '../components/CalendarioSemana/CalendarioSemana';
 import { GraficoStatus } from '../components/GraficoStatus/GraficoStatus';
 import { GerenciadorTarefas } from '../components/GerenciadorTarefas/GerenciadorTarefas';
+import { getAccessToken } from '../utils/auth';
+
+interface TarefaAPI {
+  id: number;
+  nome: string;
+  tipo: string;
+  datalimite: string;
+  observacoes?: string;
+  user_id: number;
+}
 
 export function Home() {
   const [modalAberto, setModalAberto] = useState(false);
 
   // 1. CRIANDO O TRIGGER DE ATUALIZAÇÃO
   const [triggerRefresh, setTriggerRefresh] = useState(0); 
+  const [completas, setCompletas] = useState(0);
+  const [pendentes, setPendentes] = useState(0);
+  const [atrasadas, setAtrasadas] = useState(0);
+  const [semPrazo, setSemPrazo] = useState(0);
+
+  const calcularStatusTarefas = (tarefas: TarefaAPI[]) => {
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+
+    let completasContagem = 0;
+    let pendentesContagem = 0;
+    let atrasadasContagem = 0;
+    let semPrazoContagem = 0;
+
+    tarefas.forEach((tarefa) => {
+      const prazo = tarefa.datalimite?.trim();
+      if (!prazo) {
+        semPrazoContagem += 1;
+        return;
+      }
+
+      const dataLimite = new Date(prazo);
+      dataLimite.setHours(0, 0, 0, 0);
+
+      if (dataLimite < hoje) {
+        atrasadasContagem += 1;
+      } else {
+        pendentesContagem += 1;
+      }
+    });
+
+    setCompletas(completasContagem);
+    setPendentes(pendentesContagem);
+    setAtrasadas(atrasadasContagem);
+    setSemPrazo(semPrazoContagem);
+  };
+
+  useEffect(() => {
+    const fetchStatusTarefas = async () => {
+      const token = getAccessToken();
+      if (!token) return;
+
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/Tarefas', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (!response.ok) {
+          console.error('Falha ao buscar tarefas para o gráfico de status', response.statusText);
+          return;
+        }
+
+        const dados: TarefaAPI[] = await response.json();
+        calcularStatusTarefas(dados);
+      } catch (error) {
+        console.error('Erro ao buscar tarefas para o gráfico de status', error);
+      }
+    };
+
+    fetchStatusTarefas();
+  }, [triggerRefresh]);
 
   // Função que será chamada quando o modal fechar
   const lidarComFechamentoModal = () => {
@@ -73,7 +144,7 @@ export function Home() {
           {/* Widgets Inferiores (Semana e Gráfico) */}
           <div className="widgets-grid">
             <CalendarioSemana />
-            <GraficoStatus completas={65} atrasadas={15} semPrazo={20} />
+            <GraficoStatus completas={completas} pendentes={pendentes} atrasadas={atrasadas} semPrazo={semPrazo} />
           </div>
         </div>
       </section>
@@ -94,7 +165,7 @@ export function Home() {
       </section>
 
       {/* Modal Renderizado por cima de tudo */}
-      {modalAberto && <JanelaNovaTarefa aoFechar={() => setModalAberto(false)} />}
+      {modalAberto && <JanelaNovaTarefa aoFechar={lidarComFechamentoModal} />}
       
     </div>
   );

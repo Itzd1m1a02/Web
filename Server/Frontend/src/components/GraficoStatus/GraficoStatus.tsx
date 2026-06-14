@@ -2,19 +2,21 @@ import './GraficoStatus.css';
 
 interface GraficoStatusProps {
   completas?: number;
+  pendentes?: number;
   atrasadas?: number;
   semPrazo?: number;
 }
 
 export function GraficoStatus({ 
   completas = 65, 
+  pendentes = 10,
   atrasadas = 15, 
   semPrazo = 20 
 }: GraficoStatusProps) {
-  const total = completas + atrasadas + semPrazo;
+  const total = completas + pendentes + atrasadas + semPrazo;
   
   // Calcular altura em porcentagem baseado no máximo
-  const maxValue = Math.max(completas, atrasadas, semPrazo);
+  const maxValue = Math.max(completas, pendentes, atrasadas, semPrazo) || 1;
   const calcularAltura = (valor: number) => (valor / maxValue) * 100;
 
   return (
@@ -25,6 +27,11 @@ export function GraficoStatus({
           <div className="bar completas" style={{ height: `${calcularAltura(completas)}%` }}></div>
           <span className="bar-value">{completas}</span>
           <span className="bar-label">Completas</span>
+        </div>
+        <div className="bar-wrapper">
+          <div className="bar pendentes" style={{ height: `${calcularAltura(pendentes)}%` }}></div>
+          <span className="bar-value">{pendentes}</span>
+          <span className="bar-label">Pendentes</span>
         </div>
         <div className="bar-wrapper">
           <div className="bar atrasadas" style={{ height: `${calcularAltura(atrasadas)}%` }}></div>

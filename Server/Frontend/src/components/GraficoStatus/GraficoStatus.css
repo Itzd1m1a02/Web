@@ -57,6 +57,10 @@
   background: #EF4444;
 }
 
+.bar.pendentes {
+  background: #F59E0B;
+}
+
 .bar.sem-prazo {
   background: #9CA3AF;
 }

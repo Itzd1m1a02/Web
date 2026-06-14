@@ -60,6 +60,7 @@ A aplicação permite que usuários criem, organizem e gerenciem suas rotinas di
 - ✅ **Componentes**
   - Navbar com navegação
   - Página para criar novas tarefas
+  - Gráfico de status com contagem dinâmica de tarefas
   
 - ✅ **Responsividade**
   - CSS global e específico por página
