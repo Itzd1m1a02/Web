@@ -1,82 +1,68 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+import './PainelIA.css'; // Crie este arquivo para os estilos abaixo, se desejar
+import { getAccessToken } from '../../utils/auth';
 import { apiFetch } from '../../utils/api';
-import { BadgeTipo } from '../TarefaBadges/TarefaBadges';
-import '../GerenciadorTarefas/GerenciadorTarefas.css'; // Mantém para a estrutura geral (header, botões)
-import './PainelIA.css'; // IMPORTA O NOVO CSS AQUI
 
-interface TarefaIA {
-  nome: string;
-  tipo: string;
-  datalimite: string;
-  observacoes: string;
-}
+export function PainelIA() {
+  const [direcionamento, setDirecionamento] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [erro, setErro] = useState<string>('');
 
-interface PainelIAProps {
-  onTarefaAdicionada?: () => void;
-}
+  const pedirDirecionamento = async () => {
+    setLoading(true);
+    setErro('');
+    setDirecionamento(''); // Limpa o anterior enquanto carrega o novo
 
-export function PainelIA({ onTarefaAdicionada }: PainelIAProps) {
-  const [sugestoes, setSugestoes] = useState<TarefaIA[]>([]);
-  const [carregando, setCarregando] = useState(false);
-
-  const gerarSugestoes = async () => {
-    setCarregando(true);
     try {
-      const response = await apiFetch('/IA/SugerirTarefas');
-      if (response.ok) {
-        const data = await response.json();
-        setSugestoes(data);
-      } else {
-        alert('Erro ao buscar sugestões da IA.');
+      const token = getAccessToken(); 
+      if (!token) {
+        throw new Error('Usuário não autenticado. Faça login novamente.');
       }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setCarregando(false);
-    }
-  };
-
-  const salvarNaRotina = async (tarefa: TarefaIA) => {
-    try {
-      const response = await apiFetch('/NovaTarefa', {
-        method: 'POST',
-        body: JSON.stringify(tarefa),
+      
+      // O apiFetch já configura a base URL e insere o header Authorization automaticamente
+      const response = await apiFetch('/IA/Direcionamento', {
+        method: 'GET'
       });
-      if (response.ok) {
-        alert('Tarefa adicionada à sua rotina!');
-        if (onTarefaAdicionada) onTarefaAdicionada();
+
+      if (!response.ok) {
+        throw new Error('Falha ao obter resposta da IA.');
       }
-    } catch (error) {
-      console.error(error);
+
+      const data = await response.json();
+      setDirecionamento(data.direcionamento);
+      
+    } catch (err: any) {
+      setErro('Erro ao consultar a IA. Verifique sua conexão ou a chave da API.');
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="gerenciador-container">
-      <div className="gerenciador-header" style={{ background: 'linear-gradient(135deg, #f0ebff, #fff)' }}>
-        <h2>✨ Sugestões da IA</h2>
-        <button className="btn-criar-tarefa" onClick={gerarSugestoes} disabled={carregando}>
-          {carregando ? 'Pensando...' : 'Gerar Novas Ideias'}
-        </button>
+    <div className="painel-ia-container">
+      <div className="ia-header">
+        <h2>✨ Assistente de Produtividade</h2>
+        <p>A IA analisa suas tarefas pendentes e te diz o que priorizar.</p>
       </div>
 
-      <div className="tarefas-lista grid-sugestoes">
-        {sugestoes.map((tarefa, idx) => (
-          <div key={idx} className="tarefa-card" data-tipo={tarefa.tipo}>
-            <div className="tarefa-header">
-              <div className="tarefa-titulo-container">
-                <h3 className="tarefa-titulo">{tarefa.nome}</h3>
-                <p className="tarefa-descricao">{tarefa.observacoes}</p>
-              </div>
-              <BadgeTipo tipo={tarefa.tipo} />
-            </div>
-            <div className="tarefa-footer">
-              <span className="data-vencimento">📅 Limite sugerido: {tarefa.datalimite.split('-').reverse().join('/')}</span>
-              <button className="btn-acao btn-completar" onClick={() => salvarNaRotina(tarefa)}>+ Adicionar à Rotina</button>
-            </div>
-          </div>
-        ))}
-      </div>
+      <button 
+        className="btn-ia" 
+        onClick={pedirDirecionamento} 
+        disabled={loading}
+      >
+        {loading ? 'Analisando suas tarefas...' : 'O que devo fazer primeiro?'}
+      </button>
+
+      {erro && <p className="ia-erro">{erro}</p>}
+
+      {direcionamento && (
+        <div className="ia-resultado">
+          {/* O ReactMarkdown vai converter os ** asteriscos ** em negrito e - em listas! */}
+          <ReactMarkdown>{direcionamento}</ReactMarkdown>
+        </div>
+      )}
     </div>
   );
 }
