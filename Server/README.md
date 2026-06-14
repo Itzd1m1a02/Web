@@ -1,33 +1,96 @@
-# 🍪 Projeto WEB - Sistema de Rotinas Inteligentes
+# 📚 Projeto WEB - Sistema de Rotinas Inteligentes
 
-Uma aplicação web completa e moderna para gerenciamento de tarefas, compromissos e rotinas de estudos, contando com calendários interativos e sugestões automáticas baseadas em **Inteligência Artificial (Google Gemini)**.
-
----
-
-## 🚀 Funcionalidades Principais
-
-- **Gestão de Tarefas (CRUD Completo):** Crie, edite, complete e exclua tarefas (Provas, Listas de Exercícios, Projetos e Compromissos).
-- **Calendário Mensal e Semanal:** Visualize os seus afazeres distribuídos de forma orgânica em calendários dinâmicos.
-- **Sugestões com IA:** Um painel integrado à API do Google Gemini que gera tarefas altamente desafiadoras para a sua rotina com apenas um clique.
-- **Autenticação Segura:** Login e Cadastro com criptografia de senhas (`bcrypt`) e tokens de acesso (`JWT`).
-- **Isolamento de Dados:** Cada usuário só enxerga e gerencia as tarefas criadas por ele mesmo no Banco de Dados.
-- **Administrador "Bypass":** Conta administrativa fixa imune a limpezas de banco de dados.
+O **Projeto WEB** é uma aplicação web completa e moderna focada em auxiliar na **gestão de tempo e organização de prazos** de estudos e atividades. Evitando perda de dados e garantindo uma experiência personalizada e segura, ele conta com calendários interativos e sugestões automáticas baseadas em **Inteligência Artificial (Google Gemini)**.
 
 ---
 
-## 💻 Tecnologias Utilizadas
+## 🏗️ Arquitetura do Projeto
 
-### Frontend
-- **React** (com TypeScript e Vite)
-- **React Router DOM** (Navegação de Páginas)
-- **CSS 3** (Responsividade, Animações e Glassmorphism)
+### **Backend** (FastAPI + Python)
+- **Framework:** FastAPI com Uvicorn
+- **Banco de Dados:** SQLite (embutido usando SQLAlchemy ORM)
+- **Autenticação:** JWT com passlib/bcrypt
+- **IA Integrada:** Google GenAI (Gemini API 1.5 Flash)
+- **Estrutura:** Modular com rotas, modelos, schemas e repositórios
+
+### **Frontend** (React + TypeScript)
+- **Framework:** React 19 com TypeScript
+- **Build:** Vite
+- **Roteamento:** React Router v7
+- **Estilo:** CSS 3 (Responsividade, Animações e Glassmorphism)
+- **Linting:** ESLint com suporte a React
+
+---
+
+## ✅ Funcionalidades Implementadas
 
 ### Backend
-- **Python** (FastAPI)
-- **SQLite** (Banco de Dados embutido usando SQLAlchemy)
-- **Pydantic** (Validação rigorosa de dados)
-- **Passlib & Python-JOSE** (Segurança)
-- **Google Generative AI** (Integração com Gemini 1.5 Flash)
+- ✅ **Autenticação e Autorização Segura**
+  - Sistema de registro (cadastro) de usuários.
+  - Login com geração de tokens JWT e criptografia de senhas com bcrypt.
+- ✅ **Gerenciamento de Tarefas (CRUD Completo)**
+  - Criação, leitura, edição e exclusão de tarefas (Provas, Listas, Projetos e Compromissos).
+  - Modelos de dados estruturados e validados com Pydantic.
+- ✅ **Isolamento de Dados por Usuário**
+  - Cada usuário só enxerga e gerencia as tarefas criadas por ele mesmo no Banco de Dados.
+  - Rotas backend (`GET /api/Tarefas`, `POST /api/NovaTarefa`) implementadas para associar dados ao usuário logado via JWT.
+- ✅ **Integração IA (Painel Inteligente)**
+  - Painel integrado à API do Google Gemini que gera tarefas para a rotina.
+- ✅ **Administrador "Bypass"**
+  - Conta administrativa fixa imune a limpezas de banco de dados.
+
+### Frontend
+- ✅ **Páginas Principais**
+  - Login com autenticação, Cadastro de novos usuários e Recuperação de senha.
+  - Página inicial (Home) com Gráfico de status e contagem dinâmica de tarefas.
+- ✅ **Calendário Mensal e Semanal**
+  - Consome a API e exibe os afazeres distribuídos de forma orgânica e **apenas referentes ao usuário autenticado**.
+- ✅ **Componentes e Responsividade**
+  - Navbar com navegação fluida.
+  - CSS global e específico por página com estrutura pronta para responsividade em dispositivos móveis.
+
+---
+
+## 🚧 Funcionalidades a Implementar (Próximos Passos)
+
+- [ ] **Integração Completa com Gemini API:** Gerar rotinas inteligentes com base em preferências do usuário e análise de produtividade.
+- [ ] **Gráficos e Estatísticas Avançadas:** Gráficos de carga de trabalho e análise temporal de progresso (Chart.js ou similar).
+- [ ] **UX para Verificação de Prazos:** Alertas visuais para tarefas vencidas, indicadores de urgência e notificações.
+- [ ] **Testes Automatizados:** Testes unitários para modelos e E2E para fluxos críticos.
+
+---
+
+## 📁 Estrutura de Diretórios (Módulos)
+
+```text
+Projeto WEB/
+├── Server/
+│   ├── Backend/
+│   │   ├── app/
+│   │   │   ├── models/          # Modelos de dados (User, Tarefa)
+│   │   │   ├── schemas/         # Schemas Pydantic (validação)
+│   │   │   ├── routes/          # Rotas da API (auth, tarefas)
+│   │   │   ├── repositories/    # Acesso ao banco de dados
+│   │   │   ├── security.py      # Autenticação e JWT
+│   │   │   ├── database.py      # Configuração do BD
+│   │   │   └── middlewares/     # Middlewares (logging)
+│   │   ├── main.py              # Entrada principal
+│   │   └── requirements.txt     # Dependências Python
+│   │
+│   ├── Frontend/
+│   │   ├── src/
+│   │   │   ├── pages/           # Páginas (Login, Home, etc)
+│   │   │   ├── components/      # Componentes reutilizáveis
+│   │   │   ├── css/             # Estilos globais e por página
+│   │   │   ├── App.tsx          # Componente raiz
+│   │   │   └── main.tsx         # Entrada da aplicação
+│   │   ├── public/              # Arquivos estáticos
+│   │   ├── package.json         # Dependências Node
+│   │   └── vite.config.ts       # Configuração do Vite
+│   │
+│   └── Iniciar.bat              # Script de inicialização automática
+└── README.md                    # Documentação principal
+```
 
 ---
 
@@ -50,7 +113,7 @@ Este script vai automaticamente instalar as dependências do Python, as dependê
 
 **Backend:**
 ```bash
-cd Backend
+cd Server/Backend
 pip install -r requirements.txt
 python main.py
 ```
