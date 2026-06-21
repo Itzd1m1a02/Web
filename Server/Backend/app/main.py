@@ -23,7 +23,7 @@ app = FastAPI(
 ORIGENS_PERMITIDAS = [
     "http://localhost:5173",    # O seu Frontend rodando no Vite local
     "http://127.0.0.1:5173",    # Alternativa local do Vite
-    #"https://seu-site-futuro.vercel.app" # Descomentar e adicionar a URL de produção
+    "https://app-biscoito.onrender.com" # Descomentar e adicionar a URL de produção
 ]
 
 app.add_middleware(
