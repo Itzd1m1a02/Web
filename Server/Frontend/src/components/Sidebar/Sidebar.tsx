@@ -13,9 +13,10 @@ interface SidebarProps {
   onCalendarClick: () => void;
   onTasksClick: () => void;
   onIAClick?: () => void;
+  onInfoClick?: () => void;
 }
 
-export function Sidebar({ onHomeClick, onCalendarClick, onTasksClick, onIAClick }: SidebarProps) {
+export function Sidebar({ onHomeClick, onCalendarClick, onTasksClick, onIAClick, onInfoClick }: SidebarProps) {
   // 1. Estado para memorizar qual botão está aceso
   const [ativo, setAtivo] = useState('home');
 
@@ -64,7 +65,7 @@ export function Sidebar({ onHomeClick, onCalendarClick, onTasksClick, onIAClick 
         <button className="icon-btn" title="Configurações">
           <img src={iconeConfig} alt="⚙️" className="icone-botao" />
         </button>
-        <button className="icon-btn" title="Informações">
+        <button className="icon-btn" title="Informações" onClick={onInfoClick}>
           <img src={iconeInfo} alt="ℹ️" className="icone-botao" />
         </button>
       </div>
