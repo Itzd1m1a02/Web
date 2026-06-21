@@ -1,6 +1,7 @@
-// Use relative URLs so Vite's dev proxy intercepts /api requests
-// The proxy (configured in vite.config.ts) will route /api to http://127.0.0.1:8000/api
-const BASE_URL = '/api';
+// Em desenvolvimento, se a variável não existir, usamos '/api' para o proxy do Vite funcionar.
+// Em produção no Render, o painel vai injetar a URL real da API aqui.
+const API_URL = import.meta.env.VITE_API_URL || '';
+const BASE_URL = API_URL ? `${API_URL}/api` : '/api';
 
 export async function apiFetch(endpoint: string, options: RequestInit = {}) {
   const headers = new Headers(options.headers);
@@ -9,11 +10,9 @@ export async function apiFetch(endpoint: string, options: RequestInit = {}) {
     headers.set('Content-Type', 'application/json');
   }
 
-  // Vite's dev proxy will intercept /api requests and route them to the backend.
-  // The cookie HttpOnly will be included automatically via credentials: 'include'.
   return fetch(`${BASE_URL}${endpoint}`, {
     ...options,
     headers,
-    credentials: 'include',
+    credentials: 'include', // Essencial para os Cookies HttpOnly funcionarem cross-origin
   });
 }
