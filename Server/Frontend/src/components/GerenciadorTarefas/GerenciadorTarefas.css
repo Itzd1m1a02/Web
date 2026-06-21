@@ -5,8 +5,10 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 1.5rem;
   font-family: 'Inter', sans-serif;
+  height: calc(100vh - 4rem);
+  box-sizing: border-box;
 }
 
 /* ========== O CARTÃO BRANCO DO TOPO ========== */
@@ -18,7 +20,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem; /* Empurra os filtros e as tarefas para baixo */
+  margin-bottom: 1.2rem; /* Empurra os filtros e as tarefas para baixo */
+  flex-shrink: 0;
 }
 
 /* Como o fundo agora é branco, o texto fica escuro */
@@ -54,6 +57,7 @@
   margin-bottom: 1rem;
   flex-wrap: wrap;
   justify-content: center; /* Centraliza igual ao seu esboço */
+  flex-shrink: 0;
 }
 
 /* Os filtros ficam idênticos ao botão secundário da Home */
@@ -88,6 +92,27 @@
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Estilo da scrollbar */
+.tarefas-lista::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tarefas-lista::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tarefas-lista::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+.tarefas-lista::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
 }
 
 /* O bloco de "Nenhuma tarefa", visual idêntico ao cartão da Home */
@@ -105,7 +130,7 @@
 /* ========== TAREFA CARD ========== */
 .tarefa-card {
   background: white;
-  padding: 1.8rem;
+  padding: 1.4rem;
   border-radius: 20px;
   border-left: 6px solid #5755FE; /* Mantive a barra lateral, mas mais gordinha */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);

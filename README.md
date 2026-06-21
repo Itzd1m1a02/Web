@@ -219,7 +219,23 @@ MIT License
 
 ---
 
-**Última atualização:** 14 de junho de 2026
+**Última atualização:** 21 de junho de 2026
+
+---
+
+## 📝 Changelog
+
+### [21/06/2026] - Ajustes de CSS para Rolagem
+**Correções e Melhorias:**
+- ✅ Ajustado componente `GerenciadorTarefas` para suportar rolagem vertical quando há muitas tarefas
+- ✅ Reduzido padding do container de 2rem para 1.5rem
+- ✅ Reduzido padding dos cards de tarefa de 1.8rem para 1.4rem
+- ✅ Reduzido margin-bottom do header de 2rem para 1.2rem
+- ✅ Adicionado `height: calc(100vh - 4rem)` ao container principal
+- ✅ Implementado `overflow-y: auto` na lista de tarefas com scrollbar estilizada
+- ✅ Adicionado `flex-shrink: 0` para evitar compressão de header e filtros
+- ✅ Estilizada scrollbar com webkit para melhor UX
+- **Resultado:** Layout responsivo que não quebra ao adicionar múltiplas tarefas
 
 ---
 
