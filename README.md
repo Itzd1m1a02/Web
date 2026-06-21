@@ -103,12 +103,27 @@ A aplicação permite que usuários criem, organizem e gerenciem suas rotinas di
 
 ---
 
-## 🚀 Como Executar
+## 🚀 Como Executar Localmente
 
 ### Configurar a Chave da IA
-Antes de rodar o projeto, crie um arquivo `.env` dentro da pasta `Server/Backend/` e adicione a sua chave de API do Google Gemini:
+Antes de rodar o projeto, crie um arquivo `.env` dentro da pasta `Server/Backend/` com o seguinte conteúdo (instruções no próprio arquivo):
 ```env
-GEMINI_API_KEY=sua_chave_secreta_aqui
+# ===================================
+# Configuração de Ambiente do Backend
+# ===================================
+
+# Gere uma chave forte com: python -c "import secrets; print(secrets.token_urlsafe(32))"
+# Recomendado não conter aspas ( " ), aspas simples( ' ), parêntesis( () ), colchetes ( [] ), chaves ( {} ) ou dois pontos ( : ).
+SECRET_KEY=sua_chave_secreta_aqui
+
+# Chave da API do Google Gemini (obrigatório para a IA funcionar)
+# Obtenha em: https://aistudio.google.com/app/apikeys
+GEMINI_API_KEY=sua_chave_de_api_aqui
+
+# Ambiente (development ou production)
+# Em desenvolvimento: development (cookies com secure=False, samesite=lax)
+ENV=development
+
 ```
 
 ### Pré-requisitos
@@ -249,8 +264,6 @@ MIT License
 - Cookies de autenticação:
   - Em produção o backend define `Secure=True` e `SameSite=None` para o cookie `access_token` quando `ENV=production`.
   - Isso só funciona com HTTPS; configure um reverse-proxy (NGINX, Caddy) ou TLS direto no servidor.
-
-- Não armazene tokens JWT em `localStorage` em produção — use cookies `HttpOnly` para proteção contra XSS.
 
 - Se você for usar domínios diferentes para frontend e backend, garanta que o cookie tenha `SameSite=None` e que o front-end faça requisições com `credentials: 'include'`.
 
