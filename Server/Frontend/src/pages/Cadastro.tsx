@@ -3,6 +3,7 @@ import type { FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import '../css/Cadastro.css';
 import { hashPassword } from '../utils/auth';
+import { apiFetch } from '../utils/api';
 
 // Molde de dados do TypeScript para o envio
 interface CadastroDados {
@@ -38,27 +39,32 @@ export function Cadastro() {
         };
 
         try {
-            const response = await fetch('/api/Cadastro', {
+            // Alterado para usar o apiFetch padronizado
+            const response = await apiFetch('/Cadastro', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(dadosCadastro),
-                credentials: 'include',
+                body: JSON.stringify(dadosCadastro)
             });
 
-            const resultado = await response.json();
+            // Litura defensiva da resposta para evitar panes de JSON vazio
+            let resultado: any = {};
+            const textoResposta = await response.text();
+            if (textoResposta) {
+                resultado = JSON.parse(textoResposta);
+            }
 
             if (response.ok) {
-                alert(resultado.mensagem);
+                alert(resultado.mensagem || "Cadastro realizado com sucesso!");
                 navigate("/pagina/Login"); 
             } else {
-                alert("Erro no cadastro: " + resultado.mensagem);
+                // FastAPI envia erros dentro de 'detail'
+                alert("Erro no cadastro: " + (resultado.detail || resultado.mensagem || "E-mail já cadastrado."));
             }
         } catch (error) {
             console.error('Erro:', error);
             alert("Erro ao conectar com o servidor.");
         }
     };
-
+    
     return (
         /*colocar componentes */
         <div className="signup-container">
