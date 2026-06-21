@@ -6,14 +6,12 @@ import { ContainerCalendarios } from '../components/ContainerCalendarios/Contain
 import { GraficoStatus } from '../components/GraficoStatus/GraficoStatus';
 import { GerenciadorTarefas, type Tarefa } from '../components/GerenciadorTarefas/GerenciadorTarefas';
 import { PainelIA } from '../components/PainelIA/PainelIA';
-import { ManualDeUsuario } from '../components/ManualDeUsuario/ManualDeUsuario';
 import { apiFetch } from '../utils/api';
 
 export function Home() {
   const [modalAberto, setModalAberto] = useState(false);
   const [tarefasRefresh, setTarefasRefresh] = useState(0);
   const [tarefas, setTarefas] = useState<Tarefa[]>([]);
-  const [manualAberto, setManualAberto] = useState(false);
 
   useEffect(() => {
     const fetchTarefas = async () => {
@@ -70,7 +68,7 @@ export function Home() {
     <div className="scroll-container">
       
       {/* Componente Sidebar */}
-      <Sidebar onHomeClick={rolarParaHome} onCalendarClick={rolarParaCalendario} onTasksClick={rolarParaTarefas} onIAClick={rolarParaIA} onInfoClick={() => setManualAberto(true)} />
+      <Sidebar onHomeClick={rolarParaHome} onCalendarClick={rolarParaCalendario} onTasksClick={rolarParaTarefas} onIAClick={rolarParaIA} />
 
       {/* ==========================================
           SEÇÃO 1: DASHBOARD INICIAL (Home)
@@ -143,11 +141,6 @@ export function Home() {
           aoFechar={() => setModalAberto(false)} 
           onSucesso={() => setTarefasRefresh(prev => prev + 1)}
         />
-      )}
-
-      {/* Manual do Usuário */}
-      {manualAberto && (
-        <ManualDeUsuario onFechar={() => setManualAberto(false)} />
       )}
       
     </div>
