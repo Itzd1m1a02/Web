@@ -3,7 +3,6 @@ import '../css/Home.css';
 import { ModalNovaTarefa } from '../components/JanelaNovaTarefa/JanelaNovaTarefa';
 import { Sidebar } from '../components/Sidebar/Sidebar';
 import { ContainerCalendarios } from '../components/ContainerCalendarios/ContainerCalendarios';
-import { CalendarioSemana } from '../components/CalendarioSemana/CalendarioSemana';
 import { GraficoStatus } from '../components/GraficoStatus/GraficoStatus';
 import { GerenciadorTarefas, type Tarefa } from '../components/GerenciadorTarefas/GerenciadorTarefas';
 import { PainelIA } from '../components/PainelIA/PainelIA';
