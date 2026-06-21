@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './GerenciadorTarefas.css';
-import { getAccessToken } from '../../utils/auth';
+import { isAuthenticated } from '../../utils/auth';
 import { apiFetch } from '../../utils/api';
 import { ModalEdicaoTarefa } from '../ModalEdicaoTarefa/ModalEdicaoTarefa';
 import { BadgeStatus, BadgeTipo } from '../TarefaBadges/TarefaBadges';
@@ -33,8 +33,7 @@ export function GerenciadorTarefas({ onNovaClick, refreshTrigger, onTarefasChang
 
   const carregarTarefas = async () => {
     try {
-      const token = getAccessToken();
-      if (!token) return;
+      if (!isAuthenticated()) return;
 
       const response = await apiFetch('/Tarefas');
 

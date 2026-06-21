@@ -1,14 +1,57 @@
-# Python (Caches e Arquivos Compilados)
+# ========================================
+# BACKEND (Python / FastAPI)
+# ========================================
+# Ambientes Virtuais
+venv/
+.venv/
+env/
+.env
+
+# Arquivos compilados do Python
 __pycache__/
 *.py[cod]
 *$py.class
 
-# Banco de Dados SQLite
-biscoito.db
+# Logs e dependências do Python
+*.log
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ========================================
+# FRONTEND (Node.js / React / Vite)
+# ========================================
+# Dependências do Node (MUITO IMPORTANTE IGNORAR)
+node_modules/
+/Frontend/node_modules/
+
+# Pastas de build (geradas quando o projeto vai para produção)
+dist/
+dist-ssr/
+build/
+/Frontend/dist/
+
+# Logs do NPM
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ========================================
+# BANCO DE DADOS
+# ========================================
+# Ignora o banco SQLite para não enviar dados de teste para o GitHub
 *.db
 *.sqlite3
+biscoito.db
 
-# Frontend (Node, dependências e build)
-node_modules/
-dist/
-.env
+# ========================================
+# EDITOR DE CÓDIGO E SISTEMA OPERACIONAL
+# ========================================
+# VS Code
+.vscode/
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# macOS (caso alguém da equipe use Mac no futuro)
+.DS_Store

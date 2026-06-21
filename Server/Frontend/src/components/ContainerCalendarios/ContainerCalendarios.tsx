@@ -27,9 +27,7 @@ export function ContainerCalendarios({ atualizacaoTrigger = 0 }: ContainerCalend
         {visualizacao === 'mes' && <CalendarioMensal atualizacaoTrigger={atualizacaoTrigger} />}
         
         
-        {visualizacao === 'semana' && (
-          <CalendarioSemanal atualizacaoTrigger={atualizacaoTrigger} />
-        )}
+        {visualizacao === 'semana' && <CalendarioSemanal atualizacaoTrigger={atualizacaoTrigger} />}
 
         {/* Tela de Placeholder para a implementação */}
         {visualizacao === 'dia' && (

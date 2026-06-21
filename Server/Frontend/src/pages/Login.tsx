@@ -3,6 +3,7 @@ import type { FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import '../css/Login.css'; // Importando o seu estilo
 import { saveAuthData, hashPassword } from '../utils/auth';
+import { apiFetch } from '../utils/api';
 
 // Molde de dados do TypeScript para o envio
 interface LoginDados {
@@ -25,28 +26,28 @@ export function Login() {
         const senhaHash = await hashPassword(senha);
         const loginUsuario: LoginDados = { usuario, email, senha: senhaHash };
         
-        // tentativa de verificacao 
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/Login', {
+            console.log('Enviando login para:', loginUsuario);
+            const response = await apiFetch('/Login', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(loginUsuario)
             });
 
+            console.log('Status da resposta:', response.status, response.ok);
             const resposta_API = await response.json();
+            console.log('Body da resposta:', resposta_API);
 
-            // caso a resposta do BACK seja OK
             if (response.ok) {
-                // guarde o token de acesso e usuário no navegador
-                saveAuthData(resposta_API.access_token, resposta_API.usuario ?? email);
-                alert("Login OK! Redirecionando...");
-                navigate("/pagina/Home"); // Navegação instantânea do React
+                console.log('Login bem-sucedido! Redirecionando...');
+                saveAuthData(resposta_API.usuario);
+                navigate('/pagina/Home');
             } else {
-                alert("Erro: " + (resposta_API.mensagem || resposta_API.detail || 'Falha no login'));
+                console.error('Erro de login:', resposta_API.detail);
+                alert(resposta_API.detail || "Erro ao fazer login");
             }
         } catch (error) {
             console.error('Erro de conexão: ', error);
-            alert("Erro ao conectar com o servidor");
+            alert("Erro ao ligar ao servidor");
         }
     };
 

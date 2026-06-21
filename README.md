@@ -220,3 +220,44 @@ MIT License
 ---
 
 **Última atualização:** 14 de junho de 2026
+
+---
+
+## 🚀 Deploy & Segurança (IMPORTANTE)
+
+- Variáveis de ambiente recomendadas em produção:
+  - `ENV=production`
+  - `SECRET_KEY=<uma_chave_forte_e_secreta>`
+  - `GEMINI_API_KEY=<sua_chave>`
+
+- Cookies de autenticação:
+  - Em produção o backend define `Secure=True` e `SameSite=None` para o cookie `access_token` quando `ENV=production`.
+  - Isso só funciona com HTTPS; configure um reverse-proxy (NGINX, Caddy) ou TLS direto no servidor.
+
+- Não armazene tokens JWT em `localStorage` em produção — use cookies `HttpOnly` para proteção contra XSS.
+
+- Se você for usar domínios diferentes para frontend e backend, garanta que o cookie tenha `SameSite=None` e que o front-end faça requisições com `credentials: 'include'`.
+
+- Exemplo de configuração de produção (NGINX + Uvicorn):
+
+```nginx
+server {
+  listen 443 ssl;
+  server_name seu_dominio.com;
+
+  ssl_certificate /path/to/fullchain.pem;
+  ssl_certificate_key /path/to/privkey.pem;
+
+  location / {
+    proxy_pass http://127.0.0.1:8000;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+  }
+}
+```
+
+Resumo: defina `ENV=production`, use HTTPS e deixe o backend definir cookies `HttpOnly` com `Secure` ativo para máxima segurança.

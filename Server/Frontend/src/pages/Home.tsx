@@ -93,7 +93,7 @@ export function Home() {
 
           {/* Widgets Inferiores (Semana e Gráfico) */}
           <div className="widgets-grid">
-            <CalendarioSemana key={`semana-${tarefasRefresh}`} />
+            {/*<CalendarioSemana key={`semana-${tarefasRefresh}`} /> */}
             <GraficoStatus
               key={`grafico-${tarefasRefresh}`}
               completas={tarefas.filter((tarefa) => tarefa.status === 'completa').length}

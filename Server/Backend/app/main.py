@@ -19,11 +19,17 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Configuração do CORS para o seu React
+# Configuração do CORS para o React
+ORIGENS_PERMITIDAS = [
+    "http://localhost:5173",    # O seu Frontend rodando no Vite local
+    "http://127.0.0.1:5173",    # Alternativa local do Vite
+    #"https://seu-site-futuro.vercel.app" # Descomentar e adicionar a URL de produção
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # Em produção, coloque o IP do seu front aqui
-    allow_credentials=True,
+    allow_origins=ORIGENS_PERMITIDAS, # Substituímos o "*" pela lista acima
+    allow_credentials=True,           # OBRIGATÓRIO: Permite o tráfego de Cookies!
     allow_methods=["*"],
     allow_headers=["*"],
 )

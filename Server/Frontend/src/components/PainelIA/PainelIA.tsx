@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import './PainelIA.css'; // Crie este arquivo para os estilos abaixo, se desejar
-import { getAccessToken } from '../../utils/auth';
+import { isAuthenticated } from '../../utils/auth';
 import { apiFetch } from '../../utils/api';
 
 interface PainelIAProps {
@@ -25,8 +25,7 @@ export function PainelIA({ onTarefaAdicionada }: PainelIAProps) {
     setDirecionamento(''); // Limpa o anterior enquanto carrega o novo
 
     try {
-      const token = getAccessToken(); 
-      if (!token) {
+      if (!isAuthenticated()) {
         throw new Error('Usuário não autenticado. Faça login novamente.');
       }
       

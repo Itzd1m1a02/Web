@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { DiaCalendario } from './DiaCalendario';
 import type { Tarefa } from './DiaCalendario';
-import { getAccessToken } from '../../utils/auth'; // Usando sua utils de auth
+import { apiFetch } from '../../utils/api';
+import { isAuthenticated } from '../../utils/auth';
 import './CalendarioMensal.css';
 
 interface CalendarioMensalProps {
@@ -27,16 +28,16 @@ export function CalendarioMensal({ atualizacaoTrigger = 0 }: CalendarioMensalPro
   // Disparado sempre que o mês, ano ou o trigger mudam
   useEffect(() => {
     const fetchTarefas = async () => {
-      const token = getAccessToken();
-      if (!token) return;
-
+      if (!isAuthenticated()) return;
+      
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/Tarefas', {
-          headers: { 'Authorization': `Bearer ${token}` }
+        const response = await apiFetch('/Tarefas', {
+          method: 'GET'
         });
+        
         if (response.ok) {
           const data = await response.json();
-          setTarefasBD(data);
+          setTarefasBD(Array.isArray(data) ? data : []);
         }
       } catch (error) {
         console.error('Erro ao buscar tarefas para o calendário', error);
@@ -44,7 +45,7 @@ export function CalendarioMensal({ atualizacaoTrigger = 0 }: CalendarioMensalPro
     };
 
     fetchTarefas();
-  }, [mes, ano, atualizacaoTrigger]); 
+  }, [mes, ano, atualizacaoTrigger]);
 
   // --- LÓGICA DE GERAÇÃO REAL DOS DIAS DO MÊS ---
   const diasNoMes = new Date(ano, mes, 0).getDate();

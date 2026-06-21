@@ -5,7 +5,8 @@ sqlalchemy
 pydantic[email]
 
 # Segurança e Autenticação
-passlib[bcrypt]
+passlib[bcrypt]>=1.7.4
+bcrypt>=4.0.0,<5.0.0
 python-jose[cryptography]
 
 # Integração de Inteligência Artificial

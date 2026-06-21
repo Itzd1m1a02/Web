@@ -38,10 +38,11 @@ export function Cadastro() {
         };
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/Cadastro', {
+            const response = await fetch('/api/Cadastro', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(dadosCadastro)
+                body: JSON.stringify(dadosCadastro),
+                credentials: 'include',
             });
 
             const resultado = await response.json();

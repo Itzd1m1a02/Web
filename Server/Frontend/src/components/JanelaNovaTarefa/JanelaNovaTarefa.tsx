@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
 import './JanelaNovaTarefa.css'; // Apontando para o CSS específico do Modal
-import { getAccessToken } from '../../utils/auth';
+import { isAuthenticated } from '../../utils/auth';
 import { apiFetch } from '../../utils/api';
 
 // 1. Definimos o que o Modal recebe da página que o chamou
@@ -42,8 +42,7 @@ export function ModalNovaTarefa({ aoFechar, onSucesso }: ModalNovaTarefaProps) {
         };
 
         try {
-            const token = getAccessToken();
-            if (!token) {
+            if (!isAuthenticated()) {
                 alert('Você precisa estar logado para criar uma tarefa.');
                 return;
             }
