@@ -33,6 +33,7 @@ async def criar_tarefa(
         tipo=dados.tipo,
         datalimite=dados.datalimite,
         observacoes=dados.observacoes,
+        status=dados.status or "pendente",
         user_id=int(usuario_atual.id),
     )
     

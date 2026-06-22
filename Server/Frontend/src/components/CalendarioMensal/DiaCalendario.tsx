@@ -1,12 +1,6 @@
 import { useState } from 'react';
 import './DiaCalendario.css';
-
-export interface Tarefa {
-    id: number;
-    nome: string;
-    tipo: string;
-    datalimite: string;
-}
+import { type Tarefa } from '../../types/Tarefa';
 
 interface DiaCalendarioProps {
     dia: number | null;

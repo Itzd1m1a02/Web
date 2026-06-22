@@ -4,9 +4,10 @@ import { ModalNovaTarefa } from '../components/JanelaNovaTarefa/JanelaNovaTarefa
 import { Sidebar } from '../components/Sidebar/Sidebar';
 import { ContainerCalendarios } from '../components/ContainerCalendarios/ContainerCalendarios';
 import { GraficoStatus } from '../components/GraficoStatus/GraficoStatus';
-import { GerenciadorTarefas, type Tarefa } from '../components/GerenciadorTarefas/GerenciadorTarefas';
+import { GerenciadorTarefas } from '../components/GerenciadorTarefas/GerenciadorTarefas';
 import { PainelIA } from '../components/PainelIA/PainelIA';
 import { apiFetch } from '../utils/api';
+import { type Tarefa, contarTarefasPorStatus } from '../types/Tarefa';
 
 export function Home() {
   const [modalAberto, setModalAberto] = useState(false);
@@ -23,7 +24,14 @@ export function Home() {
         }
 
         const data = await response.json();
-        setTarefas(Array.isArray(data) ? data : []);
+        // Garante que todas as tarefas têm status válido
+        const tarefasComStatus = Array.isArray(data)
+          ? data.map((t: Tarefa) => ({
+              ...t,
+              status: t.status || 'pendente',
+            }))
+          : [];
+        setTarefas(tarefasComStatus);
       } catch (error) {
         console.error('Erro ao buscar tarefas do dashboard:', error);
       }
@@ -64,6 +72,9 @@ export function Home() {
     }
   };
 
+  // Calcula contagem de tarefas por status
+  const contagem = contarTarefasPorStatus(tarefas);
+
   return (
     <div className="scroll-container">
       
@@ -95,16 +106,10 @@ export function Home() {
             {/*<CalendarioSemana key={`semana-${tarefasRefresh}`} /> */}
             <GraficoStatus
               key={`grafico-${tarefasRefresh}`}
-              completas={tarefas.filter((tarefa) => tarefa.status === 'completa').length}
-              pendentes={tarefas.filter((tarefa) => tarefa.status === 'pendente' || !tarefa.status).length}
-              atrasadas={tarefas.filter((tarefa) => {
-                if (!tarefa.datalimite) return false;
-                const prazo = new Date(tarefa.datalimite + 'T00:00:00');
-                const hoje = new Date();
-                hoje.setHours(0, 0, 0, 0);
-                return prazo < hoje && tarefa.status !== 'completa';
-              }).length}
-              semPrazo={tarefas.filter((tarefa) => !tarefa.datalimite).length}
+              completas={contagem.concluidas}
+              pendentes={contagem.pendentes}
+              atrasadas={contagem.atrasadas}
+              semPrazo={contagem.semPrazo}
             />
           </div>
         </div>

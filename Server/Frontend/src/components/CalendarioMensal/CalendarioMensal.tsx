@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { DiaCalendario } from './DiaCalendario';
-import type { Tarefa } from './DiaCalendario';
+import { type Tarefa } from '../../types/Tarefa';
 import { apiFetch } from '../../utils/api';
 import { isAuthenticated } from '../../utils/auth';
 import './CalendarioMensal.css';
@@ -94,9 +94,9 @@ export function CalendarioMensal({ atualizacaoTrigger = 0 }: CalendarioMensalPro
             ? `${ano}-${String(mes).padStart(2, '0')}-${String(dia).padStart(2, '0')}` 
             : '';
 
-          // Filtramos quais tarefas caem neste dia específico
+          // Filtramos quais tarefas caem neste dia específico (excluindo concluídas)
           const tarefasNesteDia = dia 
-            ? tarefasBD.filter(t => t.datalimite.startsWith(dataFormatada)) 
+            ? tarefasBD.filter(t => t.datalimite.startsWith(dataFormatada) && t.status !== 'concluido') 
             : [];
 
           const isHoje = dia === dataAtual.getDate() && mes === dataAtual.getMonth() + 1 && ano === dataAtual.getFullYear();

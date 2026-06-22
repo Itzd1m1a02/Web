@@ -7,7 +7,7 @@
   padding: 2rem;
   
   width: 100%;
-  max-width: 1000px;
+  /*max-width: 1000px;*/
   height: 85vh; /* Altura flexível */
   border-radius: 24px;
   display: flex;

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './ModalEdicaoTarefa.css';
-import type { Tarefa } from '../GerenciadorTarefas/GerenciadorTarefas';
+import { type Tarefa } from '../../types/Tarefa';
 
 interface ModalEdicaoTarefaProps {
   tarefa: Tarefa;
@@ -53,10 +53,10 @@ export function ModalEdicaoTarefa({ tarefa, aoFechar, aoSalvar }: ModalEdicaoTar
         
         <div className="form-group">
           <label>Status</label>
-          <select value={status} onChange={(e) => setStatus(e.target.value)}>
+          <select value={status} onChange={(e) => setStatus(e.target.value as any)}>
             <option value="pendente">Pendente</option>
-            <option value="completa">Completa</option>
             <option value="atrasada">Atrasada</option>
+            <option value="concluido">Concluído</option>
           </select>
         </div>
         
@@ -64,7 +64,7 @@ export function ModalEdicaoTarefa({ tarefa, aoFechar, aoSalvar }: ModalEdicaoTar
           <label>Tipo</label>
           <select 
             value={tipo} 
-            onChange={(e) => setTipo(e.target.value)}
+            onChange={(e) => setTipo(e.target.value as any)}
             data-tipo={tipo}
           >
             <option value="Prova">Prova</option>

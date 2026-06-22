@@ -4,15 +4,9 @@ import { isAuthenticated } from '../../utils/auth';
 import { apiFetch } from '../../utils/api';
 import { ModalEdicaoTarefa } from '../ModalEdicaoTarefa/ModalEdicaoTarefa';
 import { BadgeStatus, BadgeTipo } from '../TarefaBadges/TarefaBadges';
+import { type Tarefa, determinarStatusAutomatico } from '../../types/Tarefa';
 
-export interface Tarefa {
-  id: number;
-  nome: string;
-  tipo: string;
-  datalimite: string;
-  observacoes?: string;
-  status?: string;
-}
+export type { Tarefa };
 
 interface GerenciadorTarefasProps {
   onNovaClick?: () => void;
@@ -39,7 +33,12 @@ export function GerenciadorTarefas({ onNovaClick, refreshTrigger, onTarefasChang
 
       if (response.ok) {
         const data = await response.json();
-        setTarefas(data);
+        // Garante que todas as tarefas têm status válido
+        const tarefasComStatus = data.map((t: Tarefa) => ({
+          ...t,
+          status: t.status || 'pendente',
+        }));
+        setTarefas(tarefasComStatus);
       } else {
         console.error('Erro ao buscar tarefas:', response.statusText);
       }
@@ -55,6 +54,11 @@ export function GerenciadorTarefas({ onNovaClick, refreshTrigger, onTarefasChang
     const umDia = 24 * 60 * 60 * 1000;
 
     return tarefas.filter((tarefa) => {
+      // Não mostra tarefas concluídas
+      if (tarefa.status === 'concluido') {
+        return false;
+      }
+
       if (!tarefa.datalimite) return true;
       const partes = tarefa.datalimite.split('-');
       const data = new Date(parseInt(partes[0]), parseInt(partes[1]) - 1, parseInt(partes[2]));
@@ -181,12 +185,12 @@ export function GerenciadorTarefas({ onNovaClick, refreshTrigger, onTarefasChang
                     className="btn-acao btn-completar"
                     onClick={() =>
                       atualizarTarefa(tarefa.id, {
-                        status: tarefa.status === 'completa' ? 'pendente' : 'completa',
+                        status: tarefa.status === 'concluido' ? 'pendente' : 'concluido',
                       })
                     }
                     title="Marcar como completa"
                   >
-                    ✓ {tarefa.status === 'completa' ? 'Desfazer' : 'Completar'}
+                    ✓ {tarefa.status === 'concluido' ? 'Desfazer' : 'Completar'}
                   </button>
                   <button
                     className="btn-acao btn-deletar"

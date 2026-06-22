@@ -1,8 +1,9 @@
 import './TarefaBadges.css';
+import type { TarefaStatus } from '../../types/Tarefa';
 
-export const getCorStatus = (status?: string) => {
+export const getCorStatus = (status?: TarefaStatus) => {
   switch (status) {
-    case 'completa':
+    case 'concluido':
       return '#10B981';
     case 'atrasada':
       return '#EF4444';
@@ -27,10 +28,17 @@ export const getCorTipo = (tipo?: string) => {
   }
 };
 
-export function BadgeStatus({ status }: { status?: string }) {
+const statusTexto: Record<TarefaStatus, string> = {
+  pendente: 'Pendente',
+  atrasada: 'Atrasada',
+  concluido: 'Concluído',
+};
+
+export function BadgeStatus({ status }: { status?: TarefaStatus }) {
+  const displayStatus = status || 'pendente';
   return (
-    <span className="badge status" style={{ backgroundColor: getCorStatus(status) }}>
-      {(status || 'pendente').charAt(0).toUpperCase() + (status || 'pendente').slice(1)}
+    <span className="badge status" style={{ backgroundColor: getCorStatus(displayStatus) }}>
+      {statusTexto[displayStatus]}
     </span>
   );
 }

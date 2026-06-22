@@ -2,9 +2,13 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
+  
+  /* === O SEGREDO DA PROPORÇÃO ESTÁ AQUI === */
+  width: 94%; /* Em telas menores (notebooks, tablets), ocupa 94% da tela, deixando uma borda de respiro nas laterais */
+  max-width: 1300px; /* Em monitores Ultra-Wide, ele para de crescer ao atingir 1300px para não ficar esticado demais */
+  
+  margin: 0 auto; /* Centraliza o contêiner na tela */
+  box-sizing: border-box; /* Garante que os espaçamentos internos não quebrem o tamanho relativo */
 }
 
 .calendarios-header {

@@ -1,27 +1,209 @@
-.week-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
+.prazos-full-content {
+  display: flex;
+  flex-direction: column;
   
-  /* Aqui está o truque: a 1ª linha (Cabeçalho DOM/SEG/TER) ocupa espaço automático ('auto').
-     A 2ª linha (as células com as tarefas) ganha todo o resto do espaço disponível ('1fr') */
-  grid-template-rows: auto 1fr; 
-  gap: 10px;
+  /* A MÁGICA ESTÁ AQUI: Força o card a ter uma altura grande 
+     independente de ter 0 ou 50 tarefas */
+  height: 70vh; 
   
-  /* Faz a grade esticar preenchendo a caixa pai */
-  flex: 1; 
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid #eef0f2;
+  overflow: hidden;
 }
 
-/* O Cabeçalho com o nome das semanas */
-.week-grid .grid-header {
-  text-align: center;
+.prazos-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #f1f3f5;
+  margin-bottom: 15px;
+  flex-shrink: 0;
+}
+
+.prazos-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.prazos-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.prazos-controls span {
+  font-size: 0.9rem;
+  color: #626d7a;
+  font-weight: 500;
+}
+
+.prazos-controls button {
+  background-color: #f8f9fa;
+  border: 1px solid #dcdfe3;
+  border-radius: 6px;
+  padding: 5px 12px;
+  cursor: pointer;
+  font-size: 1.1rem;
   font-weight: bold;
-  color: #666;
-  padding-bottom: 10px;
+  color: #495057;
+  transition: all 0.15s ease;
 }
 
-/* Forçamos o componente de dia a obedecer ao esticamento do CSS Grid 
-  sem quebrar o visual interno! 
-*/
-.week-grid .dia-calendario {
+.prazos-controls button:hover {
+  background-color: #e9ecef;
+  border-color: #ced4da;
+  color: #000;
+}
+
+/* Container mestre: agora ele é o ÚNICO responsável pela rolagem horizontal */
+.prazos-main-container {
+  flex: 1;
+  overflow-x: auto; /* A única barra horizontal do componente */
+  overflow-y: hidden;
+}
+
+/* NOVA CLASSE: A "Capa" que trava o cabeçalho e as tarefas juntos */
+.prazos-sync-wrapper {
+  min-width: 100%;
+  width: max-content; /* <-- A MÁGICA: Força a capa a esticar até o fim do grid */
   height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Grid do Cabeçalho Fixo */
+.prazos-grid-header {
+  flex-shrink: 0;
+  border-bottom: 2px solid #f1f3f5;
+  padding-bottom: 4px;
+}
+
+/* Área de rolagem vertical exclusiva para as linhas de tarefas */
+.prazos-grid-body-scroll {
+  flex: 1;
+  overflow-y: auto; 
+  overflow-x: visible; /* <-- Remove a guilhotina (corte das tarefas) */
+  padding-right: 4px;
+  width: 100%; /* Garante que acompanhe o tamanho total da capa */
+}
+
+/* Estilização elegante da barra de rolagem para navegadores baseados em Webkit (Chrome, Edge, Safari) */
+.prazos-grid-body-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.prazos-grid-body-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.prazos-grid-body-scroll::-webkit-scrollbar-thumb {
+  background-color: #ced4da;
+  border-radius: 20px;
+}
+
+/* Alinhamento de células padrão */
+.grid-header-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  padding: 4px 0;
+}
+
+.grid-header-mes {
+  font-weight: bold;
+  color: #212529;
+  justify-content: flex-start;
+  padding-left: 8px;
+  font-size: 0.9rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.grid-header-semana {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: #868e96;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.grid-header-numero {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #495057;
+  padding-bottom: 6px;
+}
+
+.grid-header-hoje {
+  color: #228be6;
+  background-color: #e7f5ff;
+  border-radius: 4px;
+}
+
+/* Coluna invisível do canto superior esquerdo */
+.grid-corner {
+  grid-column: 1 / 2;
+}
+
+/* Estilo das Linhas de Conteúdo */
+.prazos-categoria {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #ffffff;
+  border-radius: 6px;
+  padding: 6px 8px;
+  text-align: center;
+  word-break: break-word;
+  line-height: 1.2;
+}
+
+.prazos-barra {
+  display: flex;
+  align-items: center;
+  /* Retiramos o justify-content daqui e passamos a responsabilidade para o texto */
+  border-radius: 6px;
+  padding: 0 12px;
+  position: relative;
+  min-height: 38px;
+  box-sizing: border-box;
+  
+  /* === O SEGREDO QUE MATA O ALARGAMENTO DO GRID === */
+  min-width: 0; 
+  overflow: hidden; 
+}
+
+.prazos-tarefa-nome {
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 8px;
+  
+  /* Faz o nome ocupar o espaço disponível e empurrar o horário para a direita */
+  flex: 1;
+  text-align: right;
+}
+
+.prazos-tarefa-horario {
+  font-size: 0.75rem;
+  font-weight: 800;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 2px 6px;
+  border-radius: 4px;
+  
+  /* Garante que o horário nunca seja esmagado pelo nome da tarefa */
+  flex-shrink: 0; 
 }

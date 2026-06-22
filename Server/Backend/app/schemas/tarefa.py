@@ -6,6 +6,7 @@ class TarefaCreate(BaseModel):
     tipo: str
     datalimite: str
     observacoes: Optional[str] = None
+    status: Optional[str] = "pendente"
     user_id: int
 
 class TarefaUpdate(BaseModel):

@@ -10,6 +10,7 @@ class Tarefa(Base):
     tipo = Column(String, nullable=False)
     datalimite = Column(String, nullable=False)
     observacoes = Column(String, nullable=True)
+    status = Column(String, default="pendente", nullable=False)
     user_id = Column(Integer, ForeignKey("usuarios.id"), nullable=False)
 
     user = relationship("User")
