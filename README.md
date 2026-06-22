@@ -64,7 +64,7 @@ A aplicação permite que usuários criem, organizem e gerenciem suas rotinas di
   - Recuperação de senha
   - Página inicial (Home)
   - Nova tarefa
-  - Manual do usuário (informações)
+  - Manual do usuário (pode ser baixado no botão Info)
   
 - ✅ **Componentes**
   - Navbar com navegação
