@@ -8,6 +8,14 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // Força logout ao carregar a aplicação no host: remove chave de autenticação
+      try {
+        localStorage.removeItem('usuario');
+      } catch (e) {
+        // ignora erros de acesso ao storage
+      }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
