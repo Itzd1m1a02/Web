@@ -117,7 +117,7 @@ Antes de rodar o projeto, crie um arquivo `.env` dentro da pasta `Server/Backend
 SECRET_KEY=sua_chave_secreta_aqui
 
 # Chave da API do Google Gemini (obrigatório para a IA funcionar)
-# Obtenha em: https://aistudio.google.com/app/apikeys
+# Obtenha em: https://aistudio.google.com/api-keys
 GEMINI_API_KEY=sua_chave_de_api_aqui
 
 # Ambiente (development ou production)
