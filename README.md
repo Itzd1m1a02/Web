@@ -6,6 +6,8 @@ O **Projeto WEB** é uma aplicação web desenvolvida para auxiliar na **gestão
 
 A aplicação permite que usuários criem, organizem e gerenciem suas rotinas diárias, evitando perda de dados e garantindo uma experiência personalizada e segura.
 
+** [Slides] **: (https://canva.link/ftfkr4nfpnnb92l)
+
 ---
 
 ## 🏗️ Arquitetura do Projeto
