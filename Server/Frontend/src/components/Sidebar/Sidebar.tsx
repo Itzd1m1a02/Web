@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import './Sidebar.css';
-import iconePerfil from '../../assets/icons/profile_icon(2).png';
-import iconeHome from '../../assets/icons/home_icon(1)_inverted.png';
-import iconeCalendario from '../../assets/icons/calendar_icon(1).png';
-import iconeGrafico from '../../assets/icons/graphic_icon(4).png';
-import iconeGlow from '../../assets/icons/glow_icon(2).png';
-import iconeConfig from '../../assets/icons/config_icon(1).png';
-import iconeInfo from '../../assets/icons/info_icon(2).png';
+import iconePerfil from '../../assets/icons/profile_icon(2)_inverted.png';
+import iconeHome from '../../assets/icons/home_icon(2)_inverted.png';
+import iconeCalendario from '../../assets/icons/calendar_icon(2)_inverted.png';
+import iconeManager from '../../assets/icons/list_icon(1)_inverted.png';
+import iconeGlow from '../../assets/icons/glow_icon(2)_inverted.png';
+import iconeConfig from '../../assets/icons/config_icon(1)_inverted.png';
+import iconeInfo from '../../assets/icons/info_icon(2)_inverted.png';
 
 interface SidebarProps {
   onHomeClick: () => void;
@@ -48,7 +48,7 @@ export function Sidebar({ onHomeClick, onCalendarClick, onTasksClick, onIAClick 
           className={`icon-btn ${ativo === 'tarefas' ? 'active' : ''}`} 
           onClick={() => { setAtivo('tarefas'); onTasksClick(); }}
         >
-          <img src={iconeGrafico} alt="📊" className="icone-botao" />
+          <img src={iconeManager} alt="📊" className="icone-botao" />
         </button>
         
         <button 
