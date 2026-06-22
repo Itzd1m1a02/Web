@@ -217,7 +217,10 @@ Projeto WEB/
 2. **Auditoria de Dados (MÉDIA PRIORIDADE)**
    - Implementar a lixeira de tarefas (soft delete)
 
-3. **Documentação (CONTÍNUO)**
+3. **Agente de IA interno (MÉDIA PRIORIDADE)**
+   - Implementar uma página interativa de agente de IA que consegue criar, modificar e deletar tarefas, criar subtarefas e aconselhar, baseado no prompt e nas necessidades do usuário.
+
+4. **Documentação (CONTÍNUO)**
    - Melhorar guia de contribuição e Swagger/OpenAPI
 
 ---
