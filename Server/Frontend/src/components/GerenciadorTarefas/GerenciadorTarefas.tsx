@@ -33,10 +33,13 @@ export function GerenciadorTarefas({ onNovaClick, refreshTrigger, onTarefasChang
 
       if (response.ok) {
         const data = await response.json();
-        // Garante que todas as tarefas têm status válido
+        // Garante que todas as tarefas têm status válido e marca atrasadas automaticamente
         const tarefasComStatus = data.map((t: Tarefa) => ({
           ...t,
-          status: t.status || 'pendente',
+          status: determinarStatusAutomatico({
+            ...t,
+            status: t.status || 'pendente',
+          }),
         }));
         setTarefas(tarefasComStatus);
       } else {
