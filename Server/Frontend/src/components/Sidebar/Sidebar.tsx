@@ -16,8 +16,9 @@ interface SidebarProps {
 }
 
 export function Sidebar({ onHomeClick, onCalendarClick, onTasksClick, onIAClick }: SidebarProps) {
-  // 1. Estado para memorizar qual botão está aceso
   const [ativo, setAtivo] = useState('home');
+
+  // A função handleDownloadManual foi removida para deixar o código mais limpo
 
   return (
     <nav className="sidebar">
@@ -29,7 +30,6 @@ export function Sidebar({ onHomeClick, onCalendarClick, onTasksClick, onIAClick 
       </div>
 
       <div className="menu-icons">
-        {/* 2. Lógica condicional: Injeta a classe 'active' só se o estado bater */}
         <button 
           className={`icon-btn ${ativo === 'home' ? 'active' : ''}`} 
           onClick={() => { setAtivo('home'); onHomeClick(); }}
@@ -64,9 +64,16 @@ export function Sidebar({ onHomeClick, onCalendarClick, onTasksClick, onIAClick 
         <button className="icon-btn" title="Configurações">
           <img src={iconeConfig} alt="⚙️" className="icone-botao" />
         </button>
-        <button className="icon-btn" title="Informações">
+        
+        {/* Substituído o <button> por um <a> usando a mesma classe CSS */}
+        <a 
+          href="/Manual_do_usuario.pdf" 
+          download="Manual_do_usuario.pdf" 
+          className="icon-btn" 
+          title="Informações"
+        >
           <img src={iconeInfo} alt="ℹ️" className="icone-botao" />
-        </button>
+        </a>
       </div>
 
     </nav>
